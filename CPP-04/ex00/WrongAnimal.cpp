@@ -6,51 +6,51 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:29:50 by udumas            #+#    #+#             */
-/*   Updated: 2024/08/29 20:29:53 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/02 15:27:19 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-Animal::Animal() : _type("NA")
+WrongAnimal::WrongAnimal() : _type("NA")
 {
-    std::cout << "New animal without type" << std::endl;
+    std::cout << "New WrongAnimal without type" << std::endl;
 }
 
-Animal::Animal(const std::string &type) : _type(type)
+WrongAnimal::WrongAnimal(const std::string &type) : _type(type)
 {
-    std::cout << type << " type of animal created" << std::endl;
+    std::cout << type << " type of WrongAnimal created" << std::endl;
 }
 
-Animal::Animal(const Animal &to_cpy) : _type(to_cpy._type)
+WrongAnimal::WrongAnimal(const WrongAnimal &to_cpy) : _type(to_cpy._type)
 {
-    std::cout << "Cloning animal type " << _type << std::endl;
+    std::cout << "Cloning WrongAnimal type " << _type << std::endl;
 }
 
-Animal::~Animal()
+WrongAnimal::~WrongAnimal()
 {
-    std::cout << "Animal disparition : " << _type << std::endl; 
+    std::cout << "WrongAnimal disparition : " << _type << std::endl; 
 }
 
-Animal &Animal::operator=(const Animal &to_cpy)
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &to_cpy)
 {
     _type = to_cpy._type;
-    std::cout << "Assignation of new animal type " << _type << std::endl;
+    std::cout << "Assignation of new WrongAnimal type " << _type << std::endl;
     return (*this);
 }
 
-std::string Animal::getType() const
+std::string WrongAnimal::getType() const
 {
     return (_type);
 }
 
-void Animal::setType(std::string &new_type)
+void WrongAnimal::setType(std::string &new_type)
 {
     _type = new_type;
     return ;
 }
 
-void Animal::makeSound() const
+void WrongAnimal::makeSound() const
 {
     std::cout << "Weird noise" << std::endl;
 }

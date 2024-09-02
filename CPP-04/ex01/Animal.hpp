@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 15:27:35 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/02 16:02:54 by udumas           ###   ########.fr       */
+/*   Created: 2024/08/29 18:12:43 by udumas            #+#    #+#             */
+/*   Updated: 2024/09/02 17:11:35 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WRONGANIMAL_HPP
-# define WRONGANIMAL_HPP
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
 
 # include <iostream>
 # include <string>
+# include "Brain.hpp"
 
-class  WrongAnimal
+class Animal
 {
     protected:
         std::string _type;
     public:
-        WrongAnimal();
-        WrongAnimal(const WrongAnimal &to_cpy);
-        WrongAnimal(const std::string &type);
+        Animal();
+        Animal(const Animal &to_cpy);
+        Animal(const std::string &type);
 
-        ~WrongAnimal();
+        virtual ~Animal();
         
-        WrongAnimal &operator=(const WrongAnimal &to_cpy);
+        Animal &operator=(const Animal &to_cpy);
 
         std::string getType() const;
         void setType(std::string &);
 
-        void makeSound() const;
+        virtual void makeSound() const;
 };
 
 #endif

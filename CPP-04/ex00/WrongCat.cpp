@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wrongCat.cpp                                       :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:20:49 by udumas            #+#    #+#             */
-/*   Updated: 2024/08/29 20:25:37 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/02 16:00:56 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wrongCat.hpp"
+#include "WrongCat.hpp"
 
-WrongCat::WrongCat() : Animal("WrongCat"), _name("WildWrongCat")
+WrongCat::WrongCat() : WrongAnimal("WrongCat"), _name("WildWrongCat")
 {
     std::cout << "New born wild Wrongcat. Welcome !!" << std::endl;
 }
 
-WrongCat::WrongCat(const std::string &name) : Animal("WrongCat"), _name(name)
+WrongCat::WrongCat(const std::string &name) : WrongAnimal("WrongCat"), _name(name)
 {
     std::cout << "New born WrongCat named " << name << ". Welcome !!" << std::endl; 
 }
 
-WrongCat::WrongCat(const WrongCat &to_cpy) : Animal(to_cpy), _name(to_cpy._name)
+WrongCat::WrongCat(const WrongCat &to_cpy) : WrongAnimal(to_cpy), _name(to_cpy._name)
 {
     std::cout << "WrongCat : " << _name << ", has been cloned correctly" << std::endl;
 }
