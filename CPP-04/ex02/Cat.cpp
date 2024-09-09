@@ -6,25 +6,25 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:29:44 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/09 17:23:33 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/09 17:45:24 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
-Cat::Cat() : Animal("Cat"), _name("WildCat")
+Cat::Cat() : AAnimal("Cat"), _name("WildCat")
 {
 	_brain = new Brain;
 	std::cout << "New born wild cat. Welcome !!" << std::endl;
 }
 
-Cat::Cat(const std::string &name) : Animal("Cat"), _name(name)
+Cat::Cat(const std::string &name) : AAnimal("Cat"), _name(name)
 {
 	_brain = new Brain;
 	std::cout << "New born Cat named " << name << ". Welcome !!" << std::endl;
 }
 
-Cat::Cat(const Cat &to_cpy) : Animal(to_cpy), _name(to_cpy._name)
+Cat::Cat(const Cat &to_cpy) : AAnimal(to_cpy), _name(to_cpy._name)
 {
 	_brain = new Brain(*to_cpy._brain);
 	std::cout << "Cat : " << _name << ", has been cloned correctly" << std::endl;

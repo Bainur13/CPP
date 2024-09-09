@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:12:43 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/09 16:30:41 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/09 17:44:11 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,24 @@ class Brain;
 class Dog;
 class Cat;
 
-class Animal
+class AAnimal
 {
     protected:
         std::string _type;
 
     public:
-        Animal();
-        Animal(const Animal &to_cpy);
-        Animal(const std::string &type);
+        AAnimal();
+        AAnimal(const AAnimal &to_cpy);
+        AAnimal(const std::string &type);
 
-        virtual ~Animal();
+        virtual ~AAnimal();
         
-        Animal &operator=(const Animal &to_cpy);
+        AAnimal &operator=(const AAnimal &to_cpy);
 
         std::string getType() const;
         void setType(std::string &);
 
-        virtual void makeSound() const;
-        virtual Brain *get_brain() const = 0;
+        virtual void makeSound() const = 0;
 };
 
 #endif

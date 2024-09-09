@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:29:44 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/09 17:23:33 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/09 17:45:02 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Brain.hpp"
+#include "Dog.hpp"
 
-Cat::Cat() : Animal("Cat"), _name("WildCat")
+Dog::Dog() : AAnimal("Dog"), _name("WildDog")
 {
 	_brain = new Brain;
-	std::cout << "New born wild cat. Welcome !!" << std::endl;
+	std::cout << "New born wild Dog. Welcome !!" << std::endl;
 }
 
-Cat::Cat(const std::string &name) : Animal("Cat"), _name(name)
+Dog::Dog(const std::string &name) : AAnimal("Dog"), _name(name)
 {
 	_brain = new Brain;
-	std::cout << "New born Cat named " << name << ". Welcome !!" << std::endl;
+	std::cout << "New born Dog named " << name << ". Welcome !!" << std::endl;
 }
 
-Cat::Cat(const Cat &to_cpy) : Animal(to_cpy), _name(to_cpy._name)
+Dog::Dog(const Dog &to_cpy) : AAnimal(to_cpy), _name(to_cpy._name)
 {
 	_brain = new Brain(*to_cpy._brain);
-	std::cout << "Cat : " << _name << ", has been cloned correctly" << std::endl;
+	std::cout << "Dog : " << _name << ", has been cloned correctly" << std::endl;
 }
 
-Cat::~Cat()
+Dog::~Dog()
 {
 	delete	_brain;
-	std::cout << "Cat : " << _name << ", Has leaved us." << std::endl;
+
+	std::cout << "Dog : " << _name << ", Has leaved us." << std::endl;
 }
 
-Cat &Cat::operator=(const Cat &to_cpy)
+Dog &Dog::operator=(const Dog &to_cpy)
 {
 	if (this != &to_cpy)
 	{
@@ -46,17 +48,17 @@ Cat &Cat::operator=(const Cat &to_cpy)
 			delete(_brain);
 			_brain = new Brain(*to_cpy._brain);
 		}
-		std::cout << "Cat " << _name << " looks now the same as cat " << to_cpy._name << std::endl;
+		std::cout << "Dog " << _name << " looks now the same as Dog " << to_cpy._name << std::endl;
 	}
 	return (*this);
 }
 
-void Cat::makeSound() const
+void Dog::makeSound() const
 {
-	std::cout << "Miaou" << std::endl;
+	std::cout << "Wouf Wouf" << std::endl;
 }
 
-Brain *Cat::get_brain() const
+Brain *Dog::get_brain() const
 {
 	return (_brain);
 }

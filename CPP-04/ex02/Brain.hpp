@@ -6,14 +6,14 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:07:20 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/05 16:58:24 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/09 17:44:46 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BRAIN_HPP
 # define BRAIN_HPP
 
-# include "Animal.hpp"
+# include "AAnimal.hpp"
 
 class Brain
 {

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 16:07:20 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/05 16:58:24 by udumas           ###   ########.fr       */
+/*   Created: 2024/08/29 19:22:09 by udumas            #+#    #+#             */
+/*   Updated: 2024/09/09 17:50:35 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-# define BRAIN_HPP
+#include "AAnimal.hpp"
+#include "Brain.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
 
-# include "Animal.hpp"
-
-class Brain
+int	main(void)
 {
-    private:
-        std::string *_ideas;
+	// AAnimal *lol = new AAnimal();
+	// lol->makeSound();
 
-    public:
-        Brain();
-        Brain(const Brain &to_cpy);
-        ~Brain();
+	AAnimal *catou = new Cat();
+	catou->makeSound();
 
-        Brain   &operator=(const Brain &to_cpy);
+	// AAnimal doggo = Dog();
+	// doggo->makeSound();
 
-        void set_ideas(std::string ideas, int index);
-        std::string get_ideas(int index);
-};
-
-#endif
+	delete(catou);
+	return (0);
+}

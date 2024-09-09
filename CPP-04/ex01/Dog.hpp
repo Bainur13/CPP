@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 18:49:05 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/02 17:11:00 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/09 16:45:26 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DOG_HPP
 
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 class Dog : public Animal
 {
@@ -26,7 +27,9 @@ class Dog : public Animal
 
 	Dog &operator=(const Dog &to_cpy);
 
-    void makeSound() const;
+	void makeSound() const;
+
+	Brain *get_brain() const;
 
   private:
 	const std::string _name;

@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/02 16:07:20 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/05 16:58:24 by udumas           ###   ########.fr       */
+/*   Created: 2024/08/29 18:26:04 by udumas            #+#    #+#             */
+/*   Updated: 2024/09/09 17:44:53 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-# define BRAIN_HPP
+#ifndef CAT_HPP
+# define CAT_HPP
 
-# include "Animal.hpp"
+# include "AAnimal.hpp"
+# include "Brain.hpp"
 
-class Brain
+class Cat : public AAnimal
 {
-    private:
-        std::string *_ideas;
+  public:
+	Cat();
+	Cat(const Cat &to_cpy);
+	Cat(const std::string &name);
 
-    public:
-        Brain();
-        Brain(const Brain &to_cpy);
-        ~Brain();
+	~Cat();
 
-        Brain   &operator=(const Brain &to_cpy);
+	Cat &operator=(const Cat &to_cpy);
 
-        void set_ideas(std::string ideas, int index);
-        std::string get_ideas(int index);
+	void makeSound() const;
+
+	Brain *get_brain() const;
+
+
+  private:
+	const std::string _name;
+	Brain *_brain;
 };
 
 #endif

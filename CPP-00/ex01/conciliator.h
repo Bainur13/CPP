@@ -22,5 +22,6 @@ int ft_stringalpha(std::string buffer);
 int ft_digit(std::string buffer);
 contacts ft_put_contact_info(void);
 void ft_show_contact(contacts contact[8], int count);
+int	check_eof(void);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 21:15:35 by bainur            #+#    #+#             */
-/*   Updated: 2024/08/29 16:32:29 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/05 15:23:24 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "conciliator.h"
 
-contacts::contacts(void)
+contacts::contacts(void) : _exit(0)
 {
 	return ;
 }
@@ -46,29 +46,49 @@ std::string contacts::get_secret(void)
 	return (this->secret);
 }
 
+int contacts::get_exit(void)
+{
+	return (this->_exit);
+}
+
 void contacts::set_firstName(std::string first_name)
 {
-    this->first_name = first_name;
+	this->first_name = first_name;
 }
 
 void contacts::set_lastName(std::string last_name)
 {
-    this->last_name = last_name;
+	this->last_name = last_name;
 }
 
 void contacts::set_nickName(std::string nickname)
 {
-    this->nickname = nickname;
+	this->nickname = nickname;
 }
 
 void contacts::set_phone(std::string phone)
 {
-    this->phone = phone;
+	this->phone = phone;
 }
 
 void contacts::set_secret(std::string secret)
 {
-    this->secret = secret;
+	this->secret = secret;
+}
+
+void contacts::set_exit(int _exit)
+{
+	this->_exit = _exit;
+}
+
+int	check_eof(void)
+{
+	if (std::cin.eof())
+	{
+		std::cout << std::endl;
+		return (1);
+	}
+	return (0);
 }
 
 contacts	ft_put_contact_info(void)
@@ -81,6 +101,11 @@ contacts	ft_put_contact_info(void)
 	{
 		std::cout << "First name = ";
 		std::getline(std::cin, buffer);
+		if (check_eof() || buffer == "EXIT")
+		{
+			contact.set_exit(1);
+			return (contact);
+		}
 		if (buffer == "")
 		{
 			std::cout << "Can not be empty" << std::endl;
@@ -91,13 +116,18 @@ contacts	ft_put_contact_info(void)
 			std::cout << "Only alphabet characters" << std::endl;
 			continue ;
 		}
-        contact.set_firstName(buffer);
+		contact.set_firstName(buffer);
 		break ;
 	}
 	while (1)
 	{
 		std::cout << "Last name = ";
 		std::getline(std::cin, buffer);
+		if (check_eof() || buffer == "EXIT")
+		{
+			contact.set_exit(1);
+			return (contact);
+		}
 		if (buffer == "")
 		{
 			std::cout << "Can not be empty" << std::endl;
@@ -108,13 +138,18 @@ contacts	ft_put_contact_info(void)
 			std::cout << "Only alphabet characters" << std::endl;
 			continue ;
 		}
-        contact.set_lastName(buffer);
+		contact.set_lastName(buffer);
 		break ;
 	}
 	while (1)
 	{
 		std::cout << "Nickname = ";
 		std::getline(std::cin, buffer);
+		if (check_eof() || buffer == "EXIT")
+		{
+			contact.set_exit(1);
+			return (contact);
+		}
 		if (buffer == "")
 		{
 			std::cout << "Can not be empty" << std::endl;
@@ -125,13 +160,18 @@ contacts	ft_put_contact_info(void)
 			std::cout << "Only alphabet characters" << std::endl;
 			continue ;
 		}
-        contact.set_nickName(buffer);
+		contact.set_nickName(buffer);
 		break ;
 	}
 	while (1)
 	{
 		std::cout << "Phone Number = ";
 		std::getline(std::cin, buffer);
+		if (check_eof() || buffer == "EXIT")
+		{
+			contact.set_exit(1);
+			return (contact);
+		}
 		if (buffer == "")
 		{
 			std::cout << "Can not be empty" << std::endl;
@@ -142,19 +182,24 @@ contacts	ft_put_contact_info(void)
 			std::cout << "Only digit characters" << std::endl;
 			continue ;
 		}
-        contact.set_phone(buffer);
+		contact.set_phone(buffer);
 		break ;
 	}
 	while (1)
 	{
 		std::cout << "Deepest secret = ";
 		std::getline(std::cin, buffer);
+		if (check_eof() || buffer == "EXIT")
+		{
+			contact.set_exit(1);
+			return (contact);
+		}
 		if (buffer == "")
 		{
 			std::cout << "Can not be empty" << std::endl;
 			continue ;
 		}
-        contact.set_secret(buffer);
+		contact.set_secret(buffer);
 		break ;
 	}
 	return (contact);
@@ -216,6 +261,11 @@ void	ft_show_contact(contacts contact[8], int count)
 	while (1)
 	{
 		std::getline(std::cin, buffer);
+		if (check_eof() || buffer == "EXIT")
+		{
+			contact[0].set_exit(1);
+			return ;
+		}
 		if (buffer == "")
 		{
 			std::cout << "Can not be empty" << std::endl;
