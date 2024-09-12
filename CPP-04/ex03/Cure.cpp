@@ -1,53 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.cpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/08 20:14:10 by bainur            #+#    #+#             */
-/*   Updated: 2024/09/12 15:33:56 by udumas           ###   ########.fr       */
+/*   Created: 2024/09/10 13:57:10 by udumas            #+#    #+#             */
+/*   Updated: 2024/09/12 15:33:03 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Ice.hpp"
+#include "Cure.hpp"
 
-Ice::Ice() : AMateria("ice")
+Cure::Cure() : AMateria("cure")
 {
 	return ;
 }
 
-Ice::Ice(Ice const &to_cpy)
+Cure::Cure(Cure const &to_cpy)
 {
 	_type = to_cpy.getType();
 	return ;
 }
 
-Ice::~Ice()
+Cure::~Cure()
 {
 	return ;
 }
 
-Ice &Ice::operator=(Ice const &to_cpy)
+Cure &Cure::operator=(Cure const &to_cpy)
 {
 	if (this == &to_cpy)
 		return (*this);
 	return (*this);
 }
 
-std::string const &Ice::getType() const
+std::string const &Cure::getType() const
 {
 	return (_type);
 }
 
-AMateria *Ice::clone() const
+AMateria *Cure::clone() const
 {
-	Ice *clone_ice = new Ice();
-	return (clone_ice);
+	Cure *clone_cure = new Cure();
+	return (clone_cure);
 }
 
-void Ice::use(ICharacter &target)
+void Cure::use(ICharacter &target)
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << "*";
+	std::cout << "Cure : * heals " << target.getName() << "’s wounds *";
 	std::cout << std::endl;
 }

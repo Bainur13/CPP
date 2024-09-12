@@ -1,6 +1,12 @@
-SRC =				
+SRC =				main.cpp \
+					AMateria.cpp \
+					Character.cpp \
+					Cure.cpp	\
+					floor_list.cpp	\
+					Ice.cpp	\
+					MateriaSource.cpp
 
-C++FLAGS = -Wall -Wextra -Werror -g3 -std=c++98
+C++FLAGS = -Wall -Wextra -Werror -g3
 
 NAME = AnimalParty
 
@@ -19,7 +25,7 @@ $(NAME): $(OBJ)
 					+------------------------+$(NC)"
 
 all: $(NAME)
-<
+
 clean:
 	rm -f $(OBJ)
 
