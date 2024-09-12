@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 19:31:06 by bainur            #+#    #+#             */
-/*   Updated: 2024/09/12 15:49:40 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:10:11 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,3 @@ std::string const &AMateria::getType() const
         std::cout << "No type in the Materia" << std::endl;
     return (_type);
 }
-
-
-
-
-
- 

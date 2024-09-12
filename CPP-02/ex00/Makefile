@@ -1,7 +1,7 @@
 SRC =				main.cpp \
 					fixed.cpp \
 
-C++FLAGS = -Wall -Wextra -Werror
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 NAME = Canonical
 

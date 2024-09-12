@@ -1,6 +1,6 @@
 SRC =				megaphone.cpp
 
-C++FLAGS = -Wall -Wextra -Werror
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 NAME = megaphone
 
@@ -15,7 +15,7 @@ RED = \033[0;31m
 $(NAME): $(OBJ)
 	c++ $(C++FLAGS) $(OBJ) -o $(NAME)
 	@echo "	 			$(RED)+------------------------+\n \
-					|  $(YELLOW)  megaphone $(GREEN)[OK]$(RED)    |\n \
+					|  $(YELLOW)    megaphone $(GREEN)[OK]$(RED)    |\n \
 					+------------------------+$(NC)"
 
 all: $(NAME)

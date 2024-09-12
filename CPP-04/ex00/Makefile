@@ -5,7 +5,7 @@ SRC =				main.cpp \
 					WrongAnimal.cpp \
 					WrongCat.cpp
 
-C++FLAGS = -Wall -Wextra -Werror -g3
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 NAME = AnimalParty
 

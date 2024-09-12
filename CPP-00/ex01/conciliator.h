@@ -25,3 +25,5 @@ void ft_show_contact(contacts contact[8], int count);
 int	check_eof(void);
 
 #endif
+
+

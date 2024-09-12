@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:39:19 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/12 18:25:47 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:09:41 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ class ICharacter
 	virtual void unequip(int idx) = 0;
 	virtual void use(int idx, ICharacter &target) = 0;
 };
+
 #endif

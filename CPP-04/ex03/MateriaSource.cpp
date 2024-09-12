@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 19:56:45 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/12 18:05:00 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:06:09 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 MateriaSource::MateriaSource() : _stock() 
 {
-	_stock[0] = nullptr;
-	_stock[1] = nullptr;
-	_stock[2] = nullptr;
-	_stock[3] = nullptr;
+	_stock[0] = 0;
+	_stock[1] = 0;
+	_stock[2] = 0;
+	_stock[3] = 0;
 	std::cout << "New MateriaSource created" << std::endl;
 	return ;
 }
@@ -42,7 +42,7 @@ MateriaSource::~MateriaSource()
 	i = 0;
     while (i < 4)
     {
-        if (_stock[i] != nullptr)
+        if (_stock[i])
             delete (_stock[i]);
         i++;
     }
@@ -59,17 +59,17 @@ MateriaSource &MateriaSource::operator=(MateriaSource const &to_cpy)
 
     while (i < 4)
     {
-        if (_stock[i] != nullptr)
+        if (_stock[i])
             delete (_stock[i]);
         i++;
     }
     i = 0;
     while (i < 4)
     {
-        if (to_cpy._stock[i] != nullptr)
+        if (to_cpy._stock[i])
             _stock[i] = to_cpy._stock[i]->clone();
         else
-            _stock[i] = nullptr;
+            _stock[i] = 0;
         i++;
     }
     return (*this);
@@ -80,7 +80,7 @@ void MateriaSource::learnMateria(AMateria *to_learn)
 	int	i;
 
 	i = 0;
-	if (to_learn == nullptr)
+	if (!to_learn)
 		return ;
 	while (i < 4)
 	{
@@ -104,7 +104,7 @@ AMateria *MateriaSource::createMateria(std::string const &type)
 	i = 0;
 	while (i < 4)
 	{
-		if (_stock[i] != nullptr)
+		if (_stock[i])
 		{
 			if (_stock[i]->getType() == type)
 			{

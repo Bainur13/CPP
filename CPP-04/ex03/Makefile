@@ -6,9 +6,9 @@ SRC =				main.cpp \
 					Ice.cpp	\
 					MateriaSource.cpp
 
-C++FLAGS = -Wall -Wextra -Werror -g3
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-NAME = AnimalParty
+NAME = WiZaRd
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -21,7 +21,7 @@ RED = \033[0;31m
 $(NAME): $(OBJ)
 	c++ $(C++FLAGS) $(OBJ) -o $(NAME)
 	@echo "	 			$(RED)+------------------------+\n \
-					|  $(YELLOW)   AnimalParty$(GREEN)[OK]$(RED)    |\n \
+					|  $(YELLOW)  WiZaRdBankrupt$(GREEN)[OK]$(RED)  |\n \
 					+------------------------+$(NC)"
 
 all: $(NAME)

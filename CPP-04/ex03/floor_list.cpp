@@ -6,14 +6,14 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 16:01:45 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/12 16:43:44 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:04:53 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 #include "AMateria.hpp"
 
-t_floor* globalFloor = nullptr;
+t_floor* globalFloor = 0;
 
 void	ft_lstAddback(AMateria *new_AMateria)
 {

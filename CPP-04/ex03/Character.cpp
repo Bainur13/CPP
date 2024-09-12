@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:29:07 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/12 18:55:05 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/12 19:04:46 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ Character &Character::operator=(const Character &to_cpy)
 	i = 0;
 	while (i < 4)
 	{
-		if (_inv[i] != nullptr)
+		if (_inv[i])
 			delete (_inv[i]);
 		i++;
 	}
@@ -48,7 +48,7 @@ Character &Character::operator=(const Character &to_cpy)
         if (to_cpy._inv[i])
 		    _inv[i] = to_cpy._inv[i]->clone();
         else
-            _inv[i] = nullptr;
+            _inv[i] = 0;
 		i++;
 	}
 	_name = to_cpy._name;
@@ -71,7 +71,7 @@ Character::~Character()
     std::cout << "Destroying " << _name << std::endl;
 	while (i < 4)
 	{
-		if (_inv[i] != nullptr)
+		if (_inv[i])
 			delete (_inv[i]);
 		i++;
 	}
@@ -109,7 +109,7 @@ void Character::equip(AMateria *m)
     }
 	while (i < 4)
 	{
-		if (_inv[i] == nullptr)
+		if (!_inv[i])
 		{
             std::cout << _name << " equiped " << m->getType() << std::endl;
 			_inv[i] = m;
@@ -129,13 +129,13 @@ void Character::unequip(int idx)
 	{
 		std::cout << "Unequip " << _inv[idx]->getType() << " from " << _name << std::endl;
 		ft_lstAddback(_inv[idx]);
-		_inv[idx] = nullptr;
+		_inv[idx] = 0;
 	}
 }
 
 void Character::use(int idx, ICharacter &target)
 {
-	if (idx >= 0 && idx < 4 && _inv[idx] != nullptr)
+	if (idx >= 0 && idx < 4 && _inv[idx])
 		_inv[idx]->use(target);
     else if (idx >= 0 && idx < 4)
         std::cout << "Nothing to use on slot " << idx << std::endl;

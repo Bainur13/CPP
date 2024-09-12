@@ -2,7 +2,7 @@ SRC =				main.cpp \
 					fixed.cpp \
 					point.cpp \
 
-C++FLAGS = -Wall -Wextra -Werror -g3
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 NAME = BPS
 
