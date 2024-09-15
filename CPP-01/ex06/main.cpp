@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 17:28:26 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/12 19:28:05 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/15 15:50:21 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void filter_actions(std::string level, Harl harl)
 {
 	switch (which_level(level))
 	{
-		case -1:
-			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 		case 0:
 			harl.complain("DEBUG");
 		case 1:
@@ -39,6 +37,9 @@ void filter_actions(std::string level, Harl harl)
 			harl.complain("WARNING");
 		case 3:
 			harl.complain("ERROR");
+			return;
+		case -1:
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 16:38:33 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/15 17:17:55 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/15 17:17:36 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,151 +82,11 @@ int Fixed::toInt(void) const
 	return (this->_value / move_point(2, _bit));
 }
 
-Fixed &Fixed::min(Fixed &a, Fixed &b)
-{
-	if (a._value < b._value)
-		return (a);
-	else
-		return (b);
-}
-
-const Fixed &Fixed::min(const Fixed &a, const Fixed &b)
-{
-	if (a._value < b._value)
-		return (a);
-	else
-		return (b);
-}
-
-Fixed &Fixed::max(Fixed &a, Fixed &b)
-{
-	if (a._value > b._value)
-		return (a);
-	else
-		return (b);
-}
-
-const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
-{
-	if (a._value > b._value)
-		return (a);
-	else
-		return (b);
-}
-
 Fixed &Fixed::operator=(const Fixed &to_copy)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->_value = to_copy.getRawBits();
 	return (*this);
-}
-
-float Fixed::operator+(const Fixed &rhs) const
-{
-	float a;
-	float b;
-
-	a = this->toFloat();
-	b = rhs.toFloat();
-	return (a + b);
-}
-
-float Fixed::operator-(const Fixed &rhs) const
-{
-	float a;
-	float b;
-
-	a = this->toFloat();
-	b = rhs.toFloat();
-	return (a - b);
-}
-
-Fixed &Fixed::operator++()
-{
-	this->_value++;
-	return (*this);
-}
-
-Fixed Fixed::operator++(int)
-{
-	Fixed old(*this);
-	this->_value++;
-	return (old);
-}
-
-Fixed Fixed::operator--(int)
-{
-	Fixed old(*this);
-	this->_value--;
-	return (old);
-}
-
-Fixed &Fixed::operator--()
-{
-	this->_value--;
-	return (*this);
-}
-
-float Fixed::operator*(const Fixed &rhs) const
-{
-	float a;
-	float b;
-
-	a = this->toFloat();
-	b = rhs.toFloat();
-	return (a * b);
-}
-
-float Fixed::operator/(const Fixed &rhs) const
-{
-	float a;
-	float b;
-
-	a = this->toFloat();
-	b = rhs.toFloat();
-	return (a / b);
-}
-
-bool Fixed::operator>(const Fixed &rhs) const
-{
-	if (this->_value > rhs._value)
-		return (1);
-	return (0);
-}
-
-bool Fixed::operator<(const Fixed &rhs) const
-{
-	if (this->_value < rhs._value)
-		return (1);
-	return (0);
-}
-
-bool Fixed::operator>=(const Fixed &rhs) const
-{
-	if (this->_value >= rhs._value)
-		return (1);
-	return (0);
-}
-
-bool Fixed::operator<=(const Fixed &rhs) const
-{
-	if (this->_value <= rhs._value)
-		return (1);
-	return (0);
-}
-
-bool Fixed::operator==(const Fixed &rhs) const
-{
-	if (this->_value == rhs._value)
-		return (1);
-	return (0);
-}
-
-bool Fixed::operator!=(const Fixed &rhs) const
-{
-	if (this->_value != rhs._value)
-		return (1);
-	return (0);
 }
 
 std::ostream &operator<<(std::ostream &o, Fixed const &cur)
