@@ -6,7 +6,7 @@
 /*   By: udumas <udumas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 17:28:26 by udumas            #+#    #+#             */
-/*   Updated: 2024/09/15 15:50:21 by udumas           ###   ########.fr       */
+/*   Updated: 2024/09/23 18:42:14 by udumas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void filter_actions(std::string level, Harl harl)
 			harl.complain("WARNING");
 		case 3:
 			harl.complain("ERROR");
-			return;
+			break;
 		case -1:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 	}
