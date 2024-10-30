@@ -33,6 +33,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
         FormNotSignedException();
     if (executor.get_grade() > get_req_grade_x())
         GradeTooLowException();
+    std::cout << random << std::endl;
     if (random % 2 == 0)
     {
         std::cout << "DRRRRRRRRRRRRRRRRRRRRRRRRRRRR" << std::endl;

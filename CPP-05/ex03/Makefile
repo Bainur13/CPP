@@ -4,6 +4,7 @@ SRC =				main.cpp \
 					ShrubberyCreationForm.cpp \
 					PresidentialPardonForm.cpp \
 					RobotomyRequestForm.cpp \
+					Intern.cpp \
 
 C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
