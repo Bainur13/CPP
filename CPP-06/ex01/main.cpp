@@ -1,15 +1,10 @@
-#include <iostream>
-#include <string>
-#include <cstdlib>
 #include "ScalarConverter.hpp"
 
-int main (int ac, char **av)
+int main(int ac, char **av)
 {
     if (ac != 2)
     {
-        std::cout << "Usage: ./convert [string]" << std::endl;
-        return 1;
+        std::cerr << "Expected one argument" << std::endl;
     }
     ScalarConverter::convert(av[1]);
-    return 0;
 }

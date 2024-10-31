@@ -1,32 +1,31 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
+#include <iostream>
 #include <string>
 #include <cstdlib>
-#include <iostream>
 #include <climits>
 #include <cfloat>
 
 class ScalarConverter
 {
     public:
-        static void convert(std::string str);
+        static void convert(const std::string &input);
     private:
         ScalarConverter();
-        ScalarConverter(ScalarConverter const &src);
-        ScalarConverter &operator=(ScalarConverter const &rhs);
+        ScalarConverter(const ScalarConverter &src);
+        ScalarConverter &operator=(const ScalarConverter &src);
         ~ScalarConverter();
 
-        static bool CheckisChar(std::string str);
-        static bool CheckisInt(std::string str);
-        static bool CheckisFloat(std::string str);
-        static bool CheckisDouble(std::string str);
+        static bool isChar(const std::string &input);
+        static bool isInt(const std::string &input);
+        static bool isFloat(const std::string &input);
+        static bool isDouble(const std::string &input);
 
-        static void printChar(std::string str);
-        static void printInt(std::string str);
-        static void printFloat(std::string str);
-        static void printDouble(std::string str);
-        static void printSpecial(std::string str);
+        static void printfromChar(const std::string &input);
+        static void printfromInt(const std::string &input);
+        static void printfromFloat(const std::string &input);
+        static void printfromDouble(const std::string &input);
 };
 
 #endif

@@ -4,14 +4,14 @@ ScalarConverter::ScalarConverter()
 {
 }
 
-ScalarConverter::ScalarConverter(ScalarConverter const &src)
+ScalarConverter::ScalarConverter(const ScalarConverter &src)
 {
     *this = src;
 }
 
-ScalarConverter &ScalarConverter::operator=(ScalarConverter const &rhs)
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 {
-    (void)rhs;
+    (void)src;
     return *this;
 }
 
@@ -19,137 +19,139 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-void ScalarConverter::convert(std::string str)
+void ScalarConverter::convert(const std::string &input)
 {
-    printChar(str);
-    printInt(str);
-    printFloat(str);
-    printDouble(str);
+    if (isChar(input))
+        printfromChar(input);
+    else if (isInt(input))
+        printfromInt(input);
+    else if (isFloat(input))
+        printfromFloat(input);
+    else if (isDouble(input))
+        printfromDouble(input);
+    else
+        std::cout << "Invalid input" << std::endl;
 }
 
-bool ScalarConverter::CheckisChar(std::string str)
+void ScalarConverter::printfromChar(const std::string &input)
 {
-    if (str == "nan" || str == "nanf" || str == "-inff" || str == "+inff" || str == "-inf" || str == "+inf")
+    std::cout << input << std::endl;
+    std::cout << "CHAR" << std::endl;
+}
+
+void ScalarConverter::printfromInt(const std::string &input)
+{
+    std::cout << input << std::endl;
+    std::cout << "Int" << std::endl;
+}
+
+void ScalarConverter::printfromFloat(const std::string &input)
+{
+    std::cout << input << std::endl;
+    std::cout << "Float" << std::endl;
+}
+
+void ScalarConverter::printfromDouble(const std::string &input)
+{
+    std::cout << input << std::endl;
+    std::cout << "Double" << std::endl;
+}
+
+bool ScalarConverter::isChar(const std::string &input)
+{
+    if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
+        return true;
+    return false;
+}
+
+bool ScalarConverter::isInt(const std::string &input)
+{
+    int i = 0;
+
+    if (input[i] == '+' || input[i] == '-')
+        i++;
+    while (input[i])
     {
-        std::cout << "Char: impossible" << std::endl;
-        return false;
-    }
-    double a = atof(str.c_str());
-    if (a < CHAR_MIN || a > CHAR_MAX)
-    {
-        std::cout << "Char: Above limits" << std::endl;
-        return false;
-    }
-    if (a < 32 || a > 126)
-    {
-        std::cout << "Char: Non displayable" << std::endl;
-        return false;
+        if (!isdigit(input[i]))
+            return false;
+        i++;
     }
     return true;
 }
 
-void ScalarConverter::printChar(std::string str)
+bool ScalarConverter::isFloat(const std::string &input)
 {
-    double a;
+    int i = 0;
+    bool deci = false;
 
-    if (CheckisChar(str))
+    if (input == "-inff" || input == "+inff" || input == "nanf")
+        return (true);
+    while (isspace(input[i]))
+        i++;
+    if (input[i] == '+' || input[i] == '-')
+        i++;
+    if (!isdigit(input[i]))
+        return false;
+    i++;
+    while (input[i])
     {
-        a = atof(str.c_str());
-        std::cout << "Char: '" << static_cast<char>(a) << "'" << std::endl;
+        if (input[i] == '.')
+        {
+            if (deci == false)
+                deci = true;
+            else
+                return (false);
+            i++;
+        }
+        if (input[i] == 'f')
+            break;
+        if (!isdigit(input[i]))
+            return false;
+        i++;
     }
+    if (input[i] != 'f')
+        return false;
+    i++;
+    while (isspace(input[i]))
+        i++;
+    if (i != (int)input.size())
+        return (false);
+    return (true);
 }
 
-bool ScalarConverter::CheckisInt(std::string str)
+bool ScalarConverter::isDouble(const std::string &input)
 {
-    if (str == "nan" || str == "nanf" || str == "-inff" || str == "+inff" || str == "-inf" || str == "+inf")
-    {
-        std::cout << "Int: impossible" << std::endl;
+    int i = 0;
+    bool deci = false;
+    
+    if (input == "-inf" || input == "+inf" || input == "nan")
+        return (true);
+    while (isspace(input[i]))
+        i++;
+    if (input[i] == '+' || input[i] == '-')
+        i++;
+    if (!isdigit(input[i]))
         return false;
-    }
-    double a = atof(str.c_str());
-    if (a < INT_MIN || a > INT_MAX)
+    i++;
+    while (input[i])
     {
-        std::cout << "Int: Above limits" << std::endl;
-        return false;
+        if (input[i] == '.')
+        {
+            if (deci == false)
+                deci = true;
+            else
+                return (false);
+            i++;
+        }
+        if (!isdigit(input[i]))
+            break;
+        i++;
     }
-    return true;
+    while (input[i])
+    {
+        if (!isspace(input[i]))
+            return (false);
+        i++;
+    }
+    return (true);
 }
-
-void ScalarConverter::printInt(std::string str)
-{
-    double a;
-
-    if (CheckisInt(str))
-    {
-        a = atof(str.c_str());
-        std::cout << "Int: " << static_cast<int>(a) << std::endl;
-    }
-}
-
-bool ScalarConverter::CheckisFloat(std::string str)
-{
-    if (str == "nan" || str == "+inf" || str == "-inf")
-    {
-        std::cout << "Float: " << str << "f" << std::endl;
-        return false;
-    }
-    if (str == "nanf" || str == "+inff" || str == "-inff")
-    {
-        std::cout << "Float: " << str << std::endl;
-        return false;
-    }
-    double a = atof(str.c_str());
-    if (a < -FLT_MAX || a > FLT_MAX)
-    {
-        std::cout << "Float: Above limits" << std::endl;
-        return false;
-    }
-    return true;
-}
-
-void ScalarConverter::printFloat(std::string str)
-{
-    float a;
-
-    if (CheckisFloat(str))
-    {
-        a = atof(str.c_str());
-        std::cout << "Float: " << a << "f" << std::endl;
-    }
-}
-
-
-bool ScalarConverter::CheckisDouble(std::string str)
-{
-    if (str == "nan" || str == "+inf" || str == "-inf")
-    {
-        std::cout << "Double: " << str << std::endl;
-        return false;
-    }
-    if (str == "nanf" || str == "+inff" || str == "-inff")
-    {
-        str.erase(str.end() - 1);
-        std::cout << "Double: " << str << std::endl;
-        return false;
-    }
-    double a = atof(str.c_str());
-    if (a < -DBL_MAX || a > DBL_MAX)
-    {
-        std::cout << "Double: Above limits" << std::endl;
-        return false;
-    }
-    return true;
-}
-
-void ScalarConverter::printDouble(std::string str)
-{
-    double a;
-
-    if (CheckisDouble(str))
-    {
-        a = atof(str.c_str());
-        std::cout << "Double: " << static_cast<double>(a) << std::endl;
-    }
-}
-
-
