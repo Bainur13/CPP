@@ -2,7 +2,7 @@ SRC =				main.cpp
 
 C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-NAME = Identifier
+NAME = Iter
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -15,7 +15,7 @@ RED = \033[0;31m
 $(NAME): $(OBJ)
 	c++ $(C++FLAGS) $(OBJ) -o $(NAME)
 	@echo "	 			$(RED)+------------------------+\n \
-					|  $(YELLOW)   Identifier   $(GREEN)[OK]$(RED) |\n \
+					|  $(YELLOW)       Iter      $(GREEN)[OK]$(RED) |\n \
 					+------------------------+$(NC)"
 
 all: $(NAME)
