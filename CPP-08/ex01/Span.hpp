@@ -17,13 +17,13 @@ class Span
         ~Span();
 
         void addNumber(int number);
-
+        void addNumbers(int begin, int end);
         template <typename Iterator>
 		void	addNumbers(Iterator begin, Iterator end)
 		{
 			while (begin != end)
 			{
-                std::cout << "mmmh" << std::endl;
+                // std::cout << *begin << std::endl;
 				addNumber(*begin);
 				begin++;
 			}
@@ -40,5 +40,6 @@ class Span
         unsigned int _N;
         std::vector<int> _vec;
 };
+
 
 #endif

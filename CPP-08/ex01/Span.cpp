@@ -10,13 +10,13 @@ Span::Span(const Span &to_cpy) : _N(to_cpy._N), _vec(to_cpy._vec)
 
 Span &Span::operator=(const Span &to_cpy)
 {
-	if (this != &to_cpy)
-	{
+    if (this != &to_cpy)
+    {
         _vec.clear();
-		_vec = to_cpy._vec;
-		_N = to_cpy._N;
-	}
-	return (*this);
+        _vec = to_cpy._vec;
+        _N = to_cpy._N;
+    }
+    return (*this);
 }
 
 Span::~Span()
@@ -25,11 +25,19 @@ Span::~Span()
 
 void Span::addNumber(int numb)
 {
-    std::cout << _vec.size() << " <- size, N ->" << _N << std::endl;
     if (_vec.size() == _N)
         throwTooMuchNumbers();
     else
         _vec.push_back(numb);
+}
+
+void Span::addNumbers(int begin, int end)
+{
+    while (begin != end)
+    {
+        addNumber(begin);
+        begin++;
+    }
 }
 
 unsigned int Span::shortestSpan()
@@ -59,8 +67,7 @@ unsigned int Span::longestSpan()
     return (_vec.back() - _vec.front());
 }
 
-
-Span::Span() : _N(0){}
+Span::Span() : _N(0) {}
 
 void Span::throwTooMuchNumbers()
 {
@@ -71,5 +78,3 @@ void Span::throwNotEnoughNumbers()
 {
     throw std::out_of_range("Not enough number in Span.");
 }
-
-
