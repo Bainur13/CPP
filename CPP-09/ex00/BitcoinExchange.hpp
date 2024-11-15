@@ -24,15 +24,28 @@ public:
 
     BitcoinExchange &operator=(BitcoinExchange const &to_cpy);
 
+    ~BitcoinExchange();
+
 private:
     BitcoinExchange();
-    std::map<t_timedef, float> _data;
-    void throwInvalidFile();
-    void throwInvalidLine();
+
+    std::pair<t_timedef, float> _data;
+    int _countLine;
+    
     void parseFile(std::ifstream &infile);
-    void parseDate(std::string &line, int &pos);
+    void parseDateValue(std::string &line);
+    float parsefloat(std::string &line, int &pos);
+    int parseInteger(std::string &line, int &pos);
+
     void skipSpace(std::string &line, int type, int &pos);
-    void checkChar(std::string, char test);
-    ~BitcoinExchange();
+    void checkChar(char c, char test, int &pos, std::string &line);
+    void checkEndl(std::string &line, int &pos);
+    
+    void isValidDate(t_timedef date);
+    void isValidValue(float value);
+
+    void throwInvalidFile();
+    void throwInvalidLine(std::string line);
+    void throwInvalid(const std::string &message);
 };
 #endif
