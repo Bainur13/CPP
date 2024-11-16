@@ -1,4 +1,5 @@
-SRC =				main.cpp
+SRC =				main.cpp \
+					BitcoinExchange.cpp
 
 C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
