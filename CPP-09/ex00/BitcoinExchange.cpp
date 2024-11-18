@@ -42,18 +42,36 @@ std::pair<t_timedef, float> BitcoinExchange::getData()
 double BitcoinExchange::compare(std::pair<t_timedef, double> *data, int count)
 {
 	double value;
-    t_timedef prev;
 
     value = -1;
-    
-
+	for (int i = 0; i < count; i++)
+	{
+		if (data[i].first.Y < _data.first.Y)
+			value = data[i].second;
+		else if (data[i].first.Y == _data.first.Y)
+		{
+			if (data[i].first.M < _data.first.M)
+				value = data->second;
+			else if (data[i].first.M == _data.first.M)
+			{
+				if (data[i].first.D <= _data.first.D)
+					value = data[i].second;
+				else
+					break;
+			}
+			else
+				break;
+		}
+		else
+			break ;
+	}
     return value;
 }
 
 void BitcoinExchange::parseFile(std::ifstream &infile, std::pair<t_timedef,
 	double> *data, int count)
 {
-	// double	mult;
+	double	mult;
 
 	std::string line;
 	while (getline(infile, line))
@@ -62,7 +80,11 @@ void BitcoinExchange::parseFile(std::ifstream &infile, std::pair<t_timedef,
 		{
 			parseDateValue(line);
 			data++;
-            std::cout << "Value : " << compare(data, count)<< std::endl;;
+            mult = compare(data, count);
+			if (mult == -1)
+				std::cout << "BitCoin wasn't released at this time" << std::endl;
+			else
+				std::cout << *this << " = " << _data.second * mult << std::endl;
 			_countLine++;
 		}
 		catch (const std::exception &e)
@@ -240,6 +262,6 @@ std::ostream &operator<<(std::ostream &o, BitcoinExchange &data)
 		o << '0';
 	}
 	o << data.getData().first.D << " => ";
-	o << data.getData().second << std::endl;
+	o << data.getData().second;
 	return (o);
 }
