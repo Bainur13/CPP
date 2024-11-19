@@ -37,17 +37,10 @@ void RPN::handleString(std::string str)
 		else if (isspace(str.c_str()[i]) || str[i] == '\0')
 			continue ;
 		else
-		{
-			// std::cout << i << std::endl;
-			// std::cout << "Invalid Character " << str[i] << std::endl;
 			throwError();
-		}
 	}
 	if (_stackNumbers.size() > 1)
-	{
-		// std::cout << "Too much char at the end" << std::endl;
 		throwError();
-	}
 	std::cout << _stackNumbers.top() << std::endl;
 }
 
