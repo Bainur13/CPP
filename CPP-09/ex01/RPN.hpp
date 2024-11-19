@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
+#include <stack>
 
 class RPN
 {
@@ -19,7 +19,7 @@ class RPN
         
 
     private :
-        std::vector<long> _stackNumbers;
+        std::stack<long> _stackNumbers;
         char _op;
         void throwError();
         int handleOperator(char c);
