@@ -1,27 +1,38 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
+# include <cstdlib>
 # include <iostream>
+# include <sstream>
 # include <string>
 # include <vector>
+# include <deque>
 
-template <typename Container = std::vector<unsigned int>>
+template <typename Container = std::vector<unsigned int> >
 
 class PmergeMe
 {
   public:
-	PmergeMe<Container>(Container T);
-	PmergeMe<Container>(const PmergeMe &to_cpy);
+	PmergeMe();
+	PmergeMe(const PmergeMe &to_cpy);
 
-	PmergeMe<Container>(const Container &to_cpy);
+	PmergeMe(const Container &to_cpy);
 
 	PmergeMe &operator=(const PmergeMe &to_cpy);
 
 	~PmergeMe();
 
+	void addElements(std::string const &numbs);
+	void sort();
+	
+	void prints();
+
   private:
-    PmergeMe<Container>();
 	Container _cont;
+	bool isSorted();
+	bool isDouble();
 };
+
+# include "PmergeMe.tpp"
 
 #endif

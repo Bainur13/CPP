@@ -49,6 +49,7 @@
         "typeinfo": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "*.tpp": "cpp"
     }
 }
