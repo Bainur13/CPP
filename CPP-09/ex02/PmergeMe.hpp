@@ -31,6 +31,7 @@ class PmergeMe
 	Container _cont;
 	bool isSorted();
 	bool isDouble();
+	void pairOrder(int size, int count);
 };
 
 # include "PmergeMe.tpp"

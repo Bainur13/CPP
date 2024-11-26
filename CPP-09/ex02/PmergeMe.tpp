@@ -55,11 +55,10 @@ template <typename Container> bool PmergeMe<Container>::isSorted()
 		std::cout << "Already Sorted" << std::endl;
 		return (0);
 	}
-	while (_cont[i + 1])
+	for (size_t i = 0; i < _cont.size() - 1; ++i)
 	{
 		if (_cont[i] > _cont[i + 1])
 			return (0);
-		i++;
 	}
 	std::cout << "Already Sorted" << std::endl;
 	return (1);
@@ -67,29 +66,58 @@ template <typename Container> bool PmergeMe<Container>::isSorted()
 
 template <typename Container> bool PmergeMe<Container>::isDouble()
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	while (_cont[i])
+	for (size_t i = 0; i < _cont.size(); ++i)
 	{
-		j = i + 1;
-		while (_cont[j])
+		for (size_t j = i + 1; j < _cont.size(); ++j)
 		{
 			if (_cont[i] == _cont[j])
 			{
 				std::cout << "Same number twice" << std::endl;
 				return (1);
 			}
-			j++;
 		}
-		i++;
 	}
 	return (0);
+}
+
+template <typename Container> void PmergeMe<Container>::pairOrder(int size, int count)
+{
+	int	npair;
+	int count2;
+
+	npair = _cont.size() / size;
+	count2 = size;
+	if (npair == 0)
+	{
+		return;
+	}
+	for (int i = 1; i <= npair; ++i)
+	{
+		if (_cont[count2 - size + count] > _cont[count2 - 1])
+		{
+			std::cout << i << std::endl;
+			int uplimit = (i) * size - 1;
+			int downlimit = size * (i - 1) + (size / 2 - 1);
+			int l = 0;
+			std::cout << "limits : uplimit = " << uplimit << " downlimit = " << downlimit << std::endl;
+			do
+			{
+				unsigned int tmp = _cont[uplimit];
+				_cont[uplimit] = _cont[downlimit];
+				_cont[downlimit] = tmp;
+				uplimit--;
+				downlimit--;
+				l++;
+			} while ( l != (size / 2));
+		}
+		count2 += size;
+	}
+	pairOrder(size * 2, size - 1);
 }
 
 template <typename Container> void PmergeMe<Container>::sort()
 {
 	if (isDouble() || isSorted())
 		return ;
+	pairOrder(2, 0);
 }
