@@ -31,7 +31,8 @@ class PmergeMe
 	Container _cont;
 	bool isSorted();
 	bool isDouble();
-	void pairOrder(int size, int count);
+	void pairOrder(int size, int count, std::vector<Container> pairs);
+	void recursiPair();
 };
 
 # include "PmergeMe.tpp"

@@ -30,5 +30,5 @@ int	main(int ac, char **av)
 	}
 	test.addElements(av[1]);
     test.sort();
-    test.prints();
+    // test.prints();
 }
