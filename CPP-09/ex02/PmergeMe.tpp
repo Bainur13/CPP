@@ -1,22 +1,18 @@
 #include "PmergeMe.hpp"
 
-template <typename Container>
-PmergeMe<Container>::PmergeMe()
+template <typename Container> PmergeMe<Container>::PmergeMe()
 {
 }
 
-template <typename Container>
-PmergeMe<Container>::PmergeMe(const PmergeMe &to_cpy) : _cont(to_cpy._cont)
+template <typename Container> PmergeMe<Container>::PmergeMe(const PmergeMe &to_cpy) : _cont(to_cpy._cont)
 {
 }
 
-template <typename Container>
-PmergeMe<Container>::PmergeMe(const Container &to_cpy) : _cont(to_cpy)
+template <typename Container> PmergeMe<Container>::PmergeMe(const Container &to_cpy) : _cont(to_cpy)
 {
 }
 
-template <typename Container>
-PmergeMe<Container> &PmergeMe<Container>::operator=(const PmergeMe<Container> &to_cpy)
+template <typename Container> PmergeMe<Container> &PmergeMe<Container>::operator=(const PmergeMe<Container> &to_cpy)
 {
 	if (this != &to_cpy)
 	{
@@ -24,13 +20,11 @@ PmergeMe<Container> &PmergeMe<Container>::operator=(const PmergeMe<Container> &t
 	}
 	return (*this);
 }
-template <typename Container>
-PmergeMe<Container>::~PmergeMe()
+template <typename Container> PmergeMe<Container>::~PmergeMe()
 {
 }
 
-template <typename Container>
-void PmergeMe<Container>::addElements(const std::string &numbs)
+template <typename Container> void PmergeMe<Container>::addElements(const std::string &numbs)
 {
 	std::istringstream iss(numbs);
 	typename Container::value_type num;
@@ -40,20 +34,18 @@ void PmergeMe<Container>::addElements(const std::string &numbs)
 	}
 }
 
-template <typename Container>
-void PmergeMe<Container>::prints()
+template <typename Container> void PmergeMe<Container>::prints()
 {
 	if (_cont.size() == 0)
-		return;
+		return ;
 	for (size_t i = 0; i < (_cont.size() - 1); i++)
 	{
 		std::cout << _cont[i] << ", ";
 	}
 	std::cout << _cont.back() << '.' << std::endl;
-	return;
+	return ;
 }
-template <typename Container>
-bool PmergeMe<Container>::isSorted()
+template <typename Container> bool PmergeMe<Container>::isSorted()
 {
 	if (_cont.size() == 1)
 	{
@@ -69,8 +61,7 @@ bool PmergeMe<Container>::isSorted()
 	return (1);
 }
 
-template <typename Container>
-bool PmergeMe<Container>::isDouble()
+template <typename Container> bool PmergeMe<Container>::isDouble()
 {
 	for (size_t i = 0; i < _cont.size(); ++i)
 	{
@@ -86,47 +77,84 @@ bool PmergeMe<Container>::isDouble()
 	return (0);
 }
 
-template <typename Container>
-void PmergeMe<Container>::pairOrder(int size, int count, std::vector<Container> pairs)
+template <typename Container> void PmergeMe<Container>::pairOrder(int size,
+	int count, std::vector<Container> &pairs)
 {
-	int count2 = size;
-	int npair = _cont.size() / 2;
+	int				npair;
+	int				index;
+	int				size_prec;
+	Container		pend;
+	Container		odd;
+	int				uplimit;
+	int				downlimit;
+	unsigned int	tmp;
+	int				l;
 
+	size_prec = size / 2;
+	npair = pairs.size() / 2;
+	index = 0;
+	count++;
 	if (npair == 0)
 		return ;
-	for (int i = 1; i <= npair; ++i)
+	for (int i = 0; i < (int)pairs.size(); i++)
 	{
-		if (_cont[count2 - size + count] > _cont[count2 - 1])
+		if (pairs[i][size_prec / 2 - 1] > pairs[i].back())
 		{
-			std::cout << i << std::endl;
-			int uplimit = (i) * size - 1;
-			int downlimit = size * (i - 1) + (size / 2 - 1);
-			int l = 0;
+			uplimit = size_prec - 1;
+			downlimit = (size_prec / 2 - 1);
+			l = 0;
 			std::cout << "limits : uplimit = " << uplimit << " downlimit = " << downlimit << std::endl;
 			do
 			{
-				unsigned int tmp = _cont[uplimit];
-				_cont[uplimit] = _cont[downlimit];
-				_cont[downlimit] = tmp;
+				tmp = pairs[i][uplimit];
+				pairs[i][uplimit] = pairs[i][downlimit];
+				pairs[i][downlimit] = tmp;
 				uplimit--;
 				downlimit--;
 				l++;
-			} while ( l != (size / 2));
+			} while (l != (size_prec / 2));
 		}
-		count2 += size;
 	}
-	pairOrder(size * 2, size - 1);
+	std::cout << "size of pairs : " << size_prec << std::endl;
+	for (int l = 0; l < (int)pairs.size(); l++)
+	{
+		std::cout << "pair number : " << l << " = ";
+		for (unsigned int i = 0; i < pairs[l].size(); i++)
+		{
+			std::cout << pairs[l][i] << ' ';
+		}
+		std::cout << std::endl;
+	}
+	std::vector<Container> npairs(npair);
+	for (int i = 0; i < npair * 2; i += 2)
+	{
+		npairs[index] = pairs[i];
+		npairs[index].insert(npairs[index].end(), pairs[i + 1].begin(), pairs[i
+			+ 1].end());
+		index++;
+	}
+	std::cout << std::endl;
+	pairOrder(size * 2, size - 1, npairs);
+	if (pairs.size() % 2 == 1)
+		odd = pairs.back();
+	if (npair % 2 == 1)
+	{
+		pend = npairs.back();
+		npairs.pop_back();
+	}
+	
 }
 
-template <typename Container>
-void PmergeMe<Container>::recursiPair()
+template <typename Container> void PmergeMe<Container>::recursiPairVec()
 {
-	int npair = _cont.size() / 2;
-	int vecNum = 0;
-	int index = 0;
+	int	npair;
+	int	vecNum;
+	int	index;
 
+	npair = _cont.size() / 2;
+	vecNum = 0;
+	index = 0;
 	std::vector<Container> pairs(npair);
-
 	for (int i = 0; i < npair; ++i)
 	{
 		while (index < (i + 1) * 2 && index < (int)_cont.size())
@@ -139,16 +167,17 @@ void PmergeMe<Container>::recursiPair()
 	// for (int l = 0; l < npair; l++)
 	// {
 	// 	std::cout << "pair number : " << l << " = ";
-	//     for (unsigned int i = 0; i < pairs[l].size(); i++)
-	//         std::cout << pairs[l][i] << ' ';
+	// 	for (unsigned int i = 0; i < pairs[l].size(); i++)
+	// 	{
+	// 		std::cout << pairs[l][i] << ' ';
+	// 	}
 	// 	std::cout << std::endl;
 	// }
 	pairOrder(4, 1, pairs);
 }
-template <typename Container>
-void PmergeMe<Container>::sort()
+template <typename Container> void PmergeMe<Container>::sort()
 {
 	if (isDouble() || isSorted())
-		return;
-	recursiPair();
+		return ;
+	recursiPairVec();
 }
