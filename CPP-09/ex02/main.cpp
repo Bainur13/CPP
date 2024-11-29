@@ -21,8 +21,7 @@ int	main(int ac, char **av)
 		std::cerr << "Wrong number of args" << std::endl;
 		return (1);
 	}
-	PmergeMe<> test;
-    PmergeMe<std::deque<unsigned int> > test2;
+	PmergeMe test;
 	if (!check_inp(av[1]))
 	{
 		std::cerr << "Invalid arg" << std::endl;

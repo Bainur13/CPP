@@ -2,13 +2,11 @@
 # define PMERGEME_HPP
 
 # include <cstdlib>
+# include <deque>
 # include <iostream>
 # include <sstream>
 # include <string>
 # include <vector>
-# include <deque>
-
-template <typename Container = std::vector<unsigned int> >
 
 class PmergeMe
 {
@@ -16,7 +14,7 @@ class PmergeMe
 	PmergeMe();
 	PmergeMe(const PmergeMe &to_cpy);
 
-	PmergeMe(const Container &to_cpy);
+	PmergeMe(const std::vector<unsigned int> &to_cpy);
 
 	PmergeMe &operator=(const PmergeMe &to_cpy);
 
@@ -24,17 +22,28 @@ class PmergeMe
 
 	void addElements(std::string const &numbs);
 	void sort();
-	
+
 	void prints();
 
   private:
-	Container _cont;
+	std::vector<unsigned int> _cont;
+	std::vector<std::vector<unsigned int> > _vec_cont;
+	std::vector<std::vector<unsigned int> > _odd;
+	std::vector<int> _rankOdd;
+	std::vector<std::string> _pos;
+	int _maxPair;
 	bool isSorted();
 	bool isDouble();
-	void pairOrder(int size, int count, std::vector<Container> &pairs);
-	void recursiPairVec();
+	void makePairAndSort();
+	void makePairAndSortRec(int size);
+	void makeInsert();
+	void divide(int size);
+	void pendInsertion();
+	void insertOdd();
+	void swap(int size);
 };
 
-# include "PmergeMe.tpp"
+void	printVectorOfVectors(const std::vector<std::vector<unsigned int> > &vec);
+
 
 #endif
