@@ -151,14 +151,14 @@ void PmergeMe::makePairAndSort()
 	}
 	if (_cont.size() % 2 == 1)
 	{
-		_odd[_odd.size()].push_back(_cont.back());
+		_odd.push_back(std::vector<unsigned int>(1, _cont.back()));
 		_rankOdd.push_back(2);
 	}
 	_maxPair = 2;
 	makePairAndSortRec(4);
 }
 
-void	printVectorOfVectors(const std::vector<std::vector<unsigned int> > &vec)
+void	printVectorOfVectors(const std::vector<std::vector<unsigned int > > &vec)
 {
 	for (std::vector<std::vector<unsigned int> >::const_iterator it = vec.begin(); it != vec.end(); ++it)
 	{
@@ -183,20 +183,97 @@ void PmergeMe::divide(int size)
 		_vec_cont[i] = temp;
 	}
 }
+
+void PmergeMe::setPend()
+{
+	_pend.clear();
+	for (int i = 2; i < (int)_vec_cont.size(); i += 2)
+	{
+		_pend.push_back(_vec_cont[i]);
+		_vec_cont.erase(_vec_cont.begin() + i);
+		i -= 1;
+	}
+	_posPend.clear();
+	for (int i = 2; i - 2 < (int)_pend.size(); i++)
+	{
+		std::string n = "";
+		n = i;
+		_posPend.push_back(n);
+	}
+	_posCont.clear();
+	_posCont.push_back("1");
+	_posCont.push_back("0");
+	for (int i = 2; i < (int)_vec_cont.size(); i += 2)
+	{
+		std::string n = "";
+		n = i;
+		_posCont.push_back(n);
+	}
+}
+
+int jacobsthal(int n)
+{
+	return round((pow(2, n + 1) + pow(-1, n)) / 3);
+}
+
 void PmergeMe::pendInsertion()
 {
 	int	left;
 	int	right;
 	int	mid;
-    
-	for (int i = 2; i < (int)_vec_cont.size(); i += 2)
+	int preJacob = jacobsthal(1);
+	int inserted = 0;
+	setPend();
+	// printVectorOfVectors(_pend);
+	for (int i = 2;; i++)
 	{
-        left = 0;
-		right = i;
+		int jacob = jacobsthal(i);
+		int jacDiff = jacob - preJacob;
+		if (jacDiff > (int)_pend.size())
+			break ;
+		int nbrtimes = jacDiff;
+		int idx_pend = jacDiff - 1;
+		
+		right = jacob + inserted;
+		left = 0;
+		while (nbrtimes)
+		{
+			mid = left + (right - left) / 2;
+			if (_pend.empty() == 0 && _pend[idx_pend].back() > _vec_cont[mid].back())
+			{
+				left = mid + 1;
+			}
+			else
+			{
+				right = mid;
+			}
+			if (left == right)
+			{
+				_vec_cont.insert(_vec_cont.begin() + left, _pend[idx_pend]);
+				_pend.erase(_pend.begin() + idx_pend);
+				_posPend.erase(_posPend.begin() + idx_pend);
+				_posCont.insert(_posCont.begin() + left, "0");
+				nbrtimes--;
+				idx_pend--;
+				right = jacob + inserted;
+				left = 0;
+			}
+		}
+		inserted += jacDiff;
+		 
+	}
+	while (_pend.empty() == 0)
+	{
+		left = 0;
+		for (int i = 0; i < (int)_posCont.size(); i++)
+		{
+			if (atoi(_posCont[i].c_str()) == atoi(_posPend.back().c_str() - 1))
+				right = i;
+		}
 		while (left < right)
 		{
 			mid = left + (right - left) / 2;
-			if (_vec_cont[mid].back() < _vec_cont[i].back())
+			if (_vec_cont[mid].back() < _pend.back().back())
 			{
 				left = mid + 1;
 			}
@@ -205,12 +282,11 @@ void PmergeMe::pendInsertion()
 				right = mid;
 			}
 		}
-        // for (int j = 0; j < (int)_vec_cont[left].size(); j++)
-		//     std::cout << _vec_cont[left][j] <<  " ";
-		_vec_cont.insert(_vec_cont.begin() + left, _vec_cont[i]);
-		_vec_cont.erase(_vec_cont.begin() + i + 1);
+		_vec_cont.insert(_vec_cont.begin() + left, _pend.back());
+		_pend.pop_back();
+		_posPend.pop_back();
+		_posCont.insert(_posCont.begin() + left, "0");
 	}
-    printVectorOfVectors(_vec_cont);
 }
 
 void PmergeMe::insertOdd()
@@ -220,7 +296,7 @@ void PmergeMe::insertOdd()
 	int	mid;
 
 	left = 0;
-	right = _vec_cont.size() - 1;
+	right = _vec_cont.size();
 	while (left < right)
 	{
 		mid = left + (right - left) / 2;
@@ -238,26 +314,25 @@ void PmergeMe::insertOdd()
 
 void PmergeMe::makeInsert()
 {
-	while (_maxPair >= 2)
+	while (_maxPair > 0)
 	{
-        _cont.clear();
-        for (int i = 0; i < (int)_vec_cont.size(); i++)
-		    _cont.insert(_cont.end(), _vec_cont[i].begin(), _vec_cont[i].end());
-        // for (int i = 0; i < (int)_cont.size(); i++)
+		_cont.clear();
+		for (int i = 0; i < (int)_vec_cont.size(); i++)
+			_cont.insert(_cont.end(), _vec_cont[i].begin(), _vec_cont[i].end());
+		// for (int i = 0; i < (int)_cont.size(); i++)
 		//     std::cout << _cont[i] <<  " ";
-        std::cout << std::endl; 
+		std::cout << std::endl;
 		divide(_maxPair);
 		pendInsertion();
-		if (_rankOdd.back() == _maxPair * 2)
+		if (_rankOdd.empty() == 0 && _rankOdd.back() == _maxPair * 2)
 		{
-            std::cout << "MaxPairrankodd = " << _maxPair << std::endl;
+			std::cout << "MaxPairrankodd = " << _maxPair << std::endl;
 			insertOdd();
 			_odd.pop_back();
 			_rankOdd.pop_back();
 		}
 		_maxPair /= 2;
 	}
-    
 }
 
 void PmergeMe::sort()
@@ -266,4 +341,5 @@ void PmergeMe::sort()
 		return ;
 	makePairAndSort();
 	makeInsert();
+	printVectorOfVectors(_vec_cont);
 }

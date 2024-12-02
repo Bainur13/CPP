@@ -7,6 +7,7 @@
 # include <sstream>
 # include <string>
 # include <vector>
+# include <cmath>
 
 class PmergeMe
 {
@@ -29,8 +30,10 @@ class PmergeMe
 	std::vector<unsigned int> _cont;
 	std::vector<std::vector<unsigned int> > _vec_cont;
 	std::vector<std::vector<unsigned int> > _odd;
+	std::vector<std::vector<unsigned int > > _pend;
 	std::vector<int> _rankOdd;
-	std::vector<std::string> _pos;
+	std::vector<std::string> _posCont;
+	std::vector<std::string> _posPend;
 	int _maxPair;
 	bool isSorted();
 	bool isDouble();
@@ -41,6 +44,8 @@ class PmergeMe
 	void pendInsertion();
 	void insertOdd();
 	void swap(int size);
+	void start_pos();
+	void setPend();
 };
 
 void	printVectorOfVectors(const std::vector<std::vector<unsigned int> > &vec);
