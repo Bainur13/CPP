@@ -1,6 +1,10 @@
 SRC =				main.cpp \
 					PmergeMe.cpp
 
+HEADERS =			PmergeMe.hpp \
+					PmergeMe.tpp
+
+
 C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
 
 NAME = RPN
@@ -27,8 +31,8 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-.cpp.o:
-	c++ $(C++FLAGS) -c $< -o ${<:.cpp=.o}
+%.o: %.cpp $(HEADERS)
+	c++ $(CXXFLAGS) -c $< -o $@
 
 re: fclean
 	make all

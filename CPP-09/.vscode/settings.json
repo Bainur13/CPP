@@ -50,6 +50,10 @@
         "ranges": "cpp",
         "span": "cpp",
         "sstream": "cpp",
-        "*.tpp": "cpp"
+        "*.tpp": "cpp",
+        "list": "cpp",
+        "chrono": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp"
     }
 }

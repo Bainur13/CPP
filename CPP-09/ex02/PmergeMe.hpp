@@ -1,39 +1,41 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
+# include <cmath>
 # include <cstdlib>
 # include <deque>
 # include <iostream>
 # include <sstream>
 # include <string>
 # include <vector>
-# include <cmath>
+# include <chrono>
 
-class PmergeMe
+template <typename Container = std::vector<unsigned int> > class PmergeMe
 {
   public:
 	PmergeMe();
 	PmergeMe(const PmergeMe &to_cpy);
 
-	PmergeMe(const std::vector<unsigned int> &to_cpy);
+	PmergeMe(const Container &to_cpy);
 
 	PmergeMe &operator=(const PmergeMe &to_cpy);
 
 	~PmergeMe();
 
 	void addElements(std::string const &numbs);
-	void sort();
-
-	void prints();
+	bool sort(std::string av, std::string type);
+	std::chrono::duration<double> duration;
+	Container getCont() const;
 
   private:
-	std::vector<unsigned int> _cont;
-	std::vector<std::vector<unsigned int> > _vec_cont;
-	std::vector<std::vector<unsigned int> > _odd;
-	std::vector<std::vector<unsigned int > > _pend;
+	Container _cont;
+	std::vector<Container> _vec_cont;
+	std::vector<Container> _odd;
+	std::vector<Container> _pend;
 	std::vector<int> _rankOdd;
 	std::vector<std::string> _posCont;
 	std::vector<std::string> _posPend;
+
 	int _maxPair;
 	bool isSorted();
 	bool isDouble();
@@ -44,11 +46,14 @@ class PmergeMe
 	void pendInsertion();
 	void insertOdd();
 	void swap(int size);
-	void start_pos();
+	void printVectorOfContainer(const std::vector<Container> &vec);
+
 	void setPend();
 };
 
-void	printVectorOfVectors(const std::vector<std::vector<unsigned int> > &vec);
+int	jacobsthal(int n);
+bool check_inp(std::string numbs);
 
+# include "PmergeMe.tpp"
 
 #endif
