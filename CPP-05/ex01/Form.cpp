@@ -57,17 +57,17 @@ int Form::get_req_grade_x() const
 void Form::GradeCheckThrow(int grade, int required)
 {
     if (grade > required)
-        GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
 }
 
-void Form::GradeTooHighException()
+const char *Form::GradeTooLowException::what(void) const throw()
 {
-    throw std::runtime_error("Exception: Grade too high");
+	return ("Grade too low");
 }
 
-void Form::GradeTooLowException()
+const char *Form::GradeTooHighException::what(void) const throw()
 {
-    throw std::runtime_error("Exception: Grade too low");
+	return ("Grade too high");
 }
 
 std::ostream &operator<<(std::ostream &o, Form const &cur)

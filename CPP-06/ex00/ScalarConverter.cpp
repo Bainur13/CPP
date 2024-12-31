@@ -40,7 +40,7 @@ void ScalarConverter::printfromChar(const std::string &input)
 	float	f;
 	double	d;
 
-	if (!isdigit(input.c_str()[0]))
+	if (!isdigit(input.c_str()[0]) && input.size() == 1)
 		c = input.c_str()[0];
 	else
 		c = atoi(input.c_str());
@@ -158,7 +158,7 @@ bool ScalarConverter::isChar(const std::string &input)
 {
 	int	n;
 
-	if (input.length() > 3)
+	if (input.length() > 3 && (input.length() > 4 && input.c_str()[0] == '-'))
 	{
 		return (false);
 	}
@@ -168,7 +168,7 @@ bool ScalarConverter::isChar(const std::string &input)
 		{
 			if (input.length() == 1 && isprint(input.c_str()[0]))
 				return (true);
-            return (false);
+			break ;
 		}
 	}
 	n = atoi(input.c_str());

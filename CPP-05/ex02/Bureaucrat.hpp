@@ -26,11 +26,20 @@ class Bureaucrat
 	void dec_grade();
 
 	void GradeCheckThrow(int grade);
-	void GradeTooHighException();
-	void GradeTooLowException();
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
 
-	void signForm(AForm & to_sign) const;
-	void executeForm(AForm const & form);
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
+
+	void signForm(AForm &to_sign);
+	void execForm(AForm &to_exec);
 
   private:
 	std::string const _name;

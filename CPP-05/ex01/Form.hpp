@@ -27,8 +27,18 @@ class Form
 	int get_req_grade_x() const;
 
     void GradeCheckThrow(int grade, int required);
-	void GradeTooHighException();
-	void GradeTooLowException();
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
+
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
+
 
   private:
 	std::string const _name;

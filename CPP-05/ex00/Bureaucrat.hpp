@@ -23,8 +23,17 @@ class Bureaucrat
 	void dec_grade();
 
 	void GradeCheckThrow(int grade);
-	void GradeTooHighException();
-	void GradeTooLowException();
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
+
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
 
   private:
 	std::string const _name;

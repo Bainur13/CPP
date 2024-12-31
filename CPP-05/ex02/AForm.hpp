@@ -26,10 +26,22 @@ class AForm
 	int get_req_grade_s() const;
 	int get_req_grade_x() const;
 
-    void GradeCheckThrow(int grade, int required);
-	void GradeTooHighException();
-	virtual void GradeTooLowException() const;
-	virtual void FormNotSignedException() const;
+   	void GradeCheckThrow(int grade, int required);
+	class GradeTooLowException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
+	class GradeTooHighException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
+	class FormNotSignedException : public std::exception
+	{
+		public:
+			virtual const char *what() const throw();
+	};
 
 	virtual void execute(Bureaucrat const &executor) const = 0;
 

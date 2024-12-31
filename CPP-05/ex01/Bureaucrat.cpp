@@ -48,19 +48,19 @@ void Bureaucrat::dec_grade()
 void Bureaucrat::GradeCheckThrow(int grade)
 {
 	if (grade > 150)
-		GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	else if (grade < 1)
-		GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 }
 
-void Bureaucrat::GradeTooHighException()
+const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	throw std::runtime_error("Grade too high");
+	return ("Grade too low");
 }
 
-void Bureaucrat::GradeTooLowException()
+const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	throw std::runtime_error("Grade too low");
+	return ("Grade too high");
 }
 
 void Bureaucrat::signForm(Form &to_sign)

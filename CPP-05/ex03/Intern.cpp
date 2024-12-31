@@ -20,6 +20,7 @@ AForm *Intern::makeForm(std::string type, std::string target)
 {
     int i;
     std::string types[3] = {"presidential pardon request", "robotomy request", "shrubbery form"};
+    AForm
     for (i = 0; i <= 3; i++)
     {
         if (i == 3 || type == types[i])

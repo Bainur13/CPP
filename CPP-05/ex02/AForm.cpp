@@ -58,22 +58,21 @@ int AForm::get_req_grade_x() const
 void AForm::GradeCheckThrow(int grade, int required)
 {
     if (grade > required)
-        GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
 }
 
-void AForm::GradeTooHighException()
+const char *AForm::GradeTooLowException::what(void) const throw()
 {
-    throw std::runtime_error("Exception: Grade too high");
+	return ("Grade too low");
 }
 
-void AForm::GradeTooLowException() const
+const char *AForm::GradeTooHighException::what(void) const throw()
 {
-    throw std::runtime_error("Exception: Grade too low");
+	return ("Grade too high");
 }
-
-void AForm::FormNotSignedException() const
+const char *AForm::FormNotSignedException::what(void) const throw()
 {
-    throw std::runtime_error("Exception: Form not signed");
+	return ("Not signed");
 }
 
 std::ostream &operator<<(std::ostream &o, AForm const &cur)

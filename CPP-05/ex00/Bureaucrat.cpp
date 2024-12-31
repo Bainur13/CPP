@@ -6,8 +6,8 @@ Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 {
-	try
-	{
+	// try
+	// {
 		if (grade >= 1 && grade <= 150)
 			_grade = grade;
 		else
@@ -18,11 +18,11 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
 				_grade = 150;
 			GradeCheckThrow(grade);
 		}
-	}
-	catch (std::exception &e)
-	{
-		std::cerr << "Caught an exception: " << e.what() << std::endl;
-	}
+	//}
+	// catch (std::exception &e)
+	// {
+	// 	std::cerr << "Caught an exception: " << e.what() << std::endl;
+	// }
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &to_cpy) : _name(to_cpy.get_name())
@@ -42,46 +42,46 @@ Bureaucrat::~Bureaucrat()
 
 void Bureaucrat::inc_grade()
 {
-	try
-	{
+	// try
+	// {
 		GradeCheckThrow(_grade - 1);
 		_grade--;
-	}
-	catch (std::exception &e)
-	{
-		std::cerr << "Caught an exception: " << e.what() << std::endl;
-	}
+	// }
+	// catch (std::exception &e)
+	// {
+	// 	std::cerr << "Caught an exception: " << e.what() << std::endl;
+	// }
 }
 
 void Bureaucrat::dec_grade()
 {
-    try
-    {
+    // try
+    // {
 		GradeCheckThrow(_grade + 1);
         _grade++;
-    }
-    catch (std::exception &e)
-    {
-		std::cerr << "Caught an exception: " << e.what() << std::endl;
-    }
+    // }
+    // catch (std::exception &e)
+    // {
+	// 	std::cerr << "Caught an exception: " << e.what() << std::endl;
+    // }
 }
 
 void Bureaucrat::GradeCheckThrow(int grade)
 {
 	if (grade > 150)
-		GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	else if (grade < 1)
-		GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 }
 
-void Bureaucrat::GradeTooHighException()
+const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	throw std::runtime_error("Grade too high");
+	return ("Grade too low");
 }
 
-void Bureaucrat::GradeTooLowException()
+const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	throw std::runtime_error("Grade too low");
+	return ("Grade too high");
 }
 
 std::string Bureaucrat::get_name() const

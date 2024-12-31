@@ -48,22 +48,22 @@ void Bureaucrat::dec_grade()
 void Bureaucrat::GradeCheckThrow(int grade)
 {
 	if (grade > 150)
-		GradeTooLowException();
+		throw Bureaucrat::GradeTooLowException();
 	else if (grade < 1)
-		GradeTooHighException();
+		throw Bureaucrat::GradeTooHighException();
 }
 
-void Bureaucrat::GradeTooHighException()
+const char *Bureaucrat::GradeTooLowException::what(void) const throw()
 {
-	throw std::runtime_error("Grade too high");
+	return ("Grade too low");
 }
 
-void Bureaucrat::GradeTooLowException()
+const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
-	throw std::runtime_error("Grade too low");
+	return ("Grade too high");
 }
 
-void Bureaucrat::signForm(AForm &to_sign) const
+void Bureaucrat::signForm(AForm &to_sign)
 {
 	if (to_sign.get_status() == 1)
 	{
@@ -79,10 +79,12 @@ void Bureaucrat::signForm(AForm &to_sign) const
 		std::cout << _name << " couldn't sign " << to_sign.get_name() << " because rank to low." << std::endl;
 }
 
-void Bureaucrat::executeForm(AForm const & to_exec)
+void Bureaucrat::execForm(AForm &to_exec)
 {
-	to_exec.execute(*this);
-	std::cout << _name << " executes " << to_exec.get_name() << "." << std::endl;
+	if (_grade > to_exec.get_req_grade_x())
+		std::cout << _name << " execute " << to_exec.get_name() << "." << std::endl;
+	else
+		std::cout << _name << " couldn't execute " << to_exec.get_name() << " because rank to low." << std::endl;
 }
 
 std::string Bureaucrat::get_name() const
