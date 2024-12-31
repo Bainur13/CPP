@@ -31,9 +31,9 @@ int	main(int ac, char **av)
 	
 	PmergeMe<std::deque<unsigned int> > test;
 	PmergeMe<std::vector<unsigned int> > test2;
-	if (test.sort(av[1], "deque") == 1)
+	if (test.sort(av[1]) == 1)
 		return (1);
-	if (test2.sort(av[1], "vector") == 1)
+	if (test2.sort(av[1]) == 1)
 		return (1);
 	std::cout << "After: ";
 	if (test.getCont().size() > 5)
@@ -48,7 +48,7 @@ int	main(int ac, char **av)
 			std::cout << test.getCont()[i] << " ";
 		std::cout << std::endl;
 	}
-	std::cout << "Time to process a range of " << test.getCont().size() << " elements with a deque: " << test.duration.count() << "us" << std::endl;
-	std::cout << "Time to process a range of " << test2.getCont().size() << " elements with a vector: " << test2.duration.count() << "us" << std::endl;
+	std::cout << "Time to process a range of " << test.getCont().size() << " elements with a deque: " << test.duration<< "us" << std::endl;
+	std::cout << "Time to process a range of " << test2.getCont().size() << " elements with a vector: " << test2.duration << "us" << std::endl;
 	return (0);
 }

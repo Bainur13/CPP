@@ -8,7 +8,7 @@
 # include <sstream>
 # include <string>
 # include <vector>
-# include <chrono>
+# include <ctime>
 
 template <typename Container = std::vector<unsigned int> > class PmergeMe
 {
@@ -23,8 +23,8 @@ template <typename Container = std::vector<unsigned int> > class PmergeMe
 	~PmergeMe();
 
 	void addElements(std::string const &numbs);
-	bool sort(std::string av, std::string type);
-	std::chrono::duration<double> duration;
+	bool sort(std::string av);
+	double duration;
 	Container getCont() const;
 
   private:

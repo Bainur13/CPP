@@ -7,7 +7,7 @@ HEADERS =			PmergeMe.hpp \
 
 C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
 
-NAME = RPN
+NAME = PmergeMe
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -20,7 +20,7 @@ RED = \033[0;31m
 $(NAME): $(OBJ)
 	c++ $(C++FLAGS) $(OBJ) -o $(NAME)
 	@echo "	 			$(RED)+------------------------+\n \
-					|  $(YELLOW)       RPN$(GREEN)[OK]$(RED)        |\n \
+					|  $(YELLOW)       PmergeMe$(GREEN)[OK]$(RED)        |\n \
 					+------------------------+$(NC)"
 
 all: $(NAME)
@@ -32,7 +32,7 @@ fclean: clean
 	rm -f $(NAME)
 
 %.o: %.cpp $(HEADERS)
-	c++ $(CXXFLAGS) -c $< -o $@
+	c++ $(C++FLAGS) -c $< -o $@
 
 re: fclean
 	make all

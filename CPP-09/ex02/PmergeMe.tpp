@@ -258,7 +258,7 @@ template <typename Container> void PmergeMe<Container>::pendInsertion()
 		_vec_cont.insert(_vec_cont.begin() + left, _pend.back());
 		_pend.pop_back();
 		_posPend.pop_back();
-		if (left > _posCont.size())
+		if (left > (int)_posCont.size())
 			_posCont.resize(left);
 		else
 		_posCont.insert(_posCont.begin() + left, "0");
@@ -313,10 +313,9 @@ template <typename Container> void PmergeMe<Container>::makeInsert()
 		_cont.insert(_cont.end(), _vec_cont[i].begin(), _vec_cont[i].end());
 }
 
-template <typename Container> bool PmergeMe<Container>::sort(std::string av,
-	std::string type)
+template <typename Container> bool PmergeMe<Container>::sort(std::string av)
 {
-	auto	start = std::chrono::high_resolution_clock::now();
+	std::clock_t	start = std::clock();
 	if (!check_inp(av))
 	{
 		std::cerr << "Invalid arg" << std::endl;
@@ -327,9 +326,8 @@ template <typename Container> bool PmergeMe<Container>::sort(std::string av,
 		return (1);
 	makePairAndSort();
 	makeInsert();
-	auto end = std::chrono::high_resolution_clock::now();
-	duration = std::chrono::duration_cast<std::chrono::microseconds>(end
-			- start);
+	std::clock_t end = std::clock();
+	duration = double(end - start) / CLOCKS_PER_SEC;
 	isSorted();
 	std::cout << std::endl;
 	printVectorOfContainer(_vec_cont);
