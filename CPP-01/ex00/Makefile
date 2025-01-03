@@ -3,7 +3,7 @@ SRC =				main.cpp \
 					newZombie.cpp \
 					randomChump.cpp
 
-C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 
 
 NAME = BraiiiiiiinnnzzzZ
 

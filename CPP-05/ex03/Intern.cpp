@@ -1,4 +1,8 @@
 #include "Intern.hpp"
+#include <iostream>
+#include <stdexcept>
+
+typedef AForm* (*FormCreator)(const std::string &target);
 
 Intern::Intern() {}
 
@@ -16,30 +20,29 @@ Intern &Intern::operator=(const Intern &to_cpy)
 
 Intern::~Intern() {}
 
+AForm* createPresidentialPardonForm(const std::string &target)
+{
+    return new PresidentialPardonForm(target);
+}
+
+AForm* createRobotomyRequestForm(const std::string &target) {
+    return new RobotomyRequestForm(target);
+}
+
+AForm* createShrubberyCreationForm(const std::string &target) {
+    return new ShrubberyCreationForm(target);
+}
+
 AForm *Intern::makeForm(std::string type, std::string target)
 {
-    int i;
     std::string types[3] = {"presidential pardon request", "robotomy request", "shrubbery form"};
-    AForm
-    for (i = 0; i <= 3; i++)
-    {
-        if (i == 3 || type == types[i])
-            break;
+    FormCreator creators[3] = {createPresidentialPardonForm, createRobotomyRequestForm, createShrubberyCreationForm};
+
+    for (int i = 0; i < 3; i++) {
+        if (type == types[i]) {
+            std::cout << "Intern creates " << types[i] << std::endl;
+            return creators[i](target);
+        }
     }
-    switch (i)
-    {
-    case 0:
-        std::cout << "Intern creates " << types[i] << std::endl;
-        return (new PresidentialPardonForm(target));
-    case 1:
-        std::cout << "Intern creates " << types[i] << std::endl;
-        return (new RobotomyRequestForm(target));
-    case 2:
-        std::cout << "Intern creates " << types[i] << std::endl;
-        return (new ShrubberyCreationForm(target));
-    case 3:
-        throw std::runtime_error("Invalid Form Name");
-    default:
-        throw std::runtime_error("Invalid Form Name");
-    }
+    throw std::runtime_error("Invalid Form Name");
 }

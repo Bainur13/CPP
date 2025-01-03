@@ -4,14 +4,14 @@ BitcoinExchange::BitcoinExchange()
 {
 }
 
-BitcoinExchange::BitcoinExchange(std::string file, std::pair<t_timedef,
-	double> *data, int count)
+BitcoinExchange::BitcoinExchange(std::string file, std::map<t_timedef,
+	double> data)
 {
 	std::ifstream ifile(file.c_str());
 	_countLine = 0;
 	if (!ifile.is_open())
 		throwInvalidFile();
-	parseFile(ifile, data, count);
+	parseFile(ifile, data);
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &to_cpy)
@@ -39,23 +39,23 @@ std::pair<t_timedef, float> BitcoinExchange::getData()
 	return (_data);
 }
 
-double BitcoinExchange::compare(std::pair<t_timedef, double> *data, int count)
+double BitcoinExchange::compare(std::map<t_timedef, double> data)
 {
 	double value;
 
     value = -1;
-	for (int i = 0; i < count; i++)
-	{
-		if (data[i].first.Y < _data.first.Y)
-			value = data[i].second;
-		else if (data[i].first.Y == _data.first.Y)
+	for (std::map<t_timedef, double>::iterator it = data.begin(); it != data.end(); it++)
+	{		
+		if (it->first.Y < _data.first.Y)
+			value = it->second;
+		else if (it->first.Y == _data.first.Y)
 		{
-			if (data[i].first.M < _data.first.M)
-				value = data->second;
-			else if (data[i].first.M == _data.first.M)
+			if (it->first.M < _data.first.M)
+				value = it->second;
+			else if (it->first.M == _data.first.M)
 			{
-				if (data[i].first.D <= _data.first.D)
-					value = data[i].second;
+				if (it->first.D <= _data.first.D)
+					value = it->second;
 				else
 					break;
 			}
@@ -68,8 +68,8 @@ double BitcoinExchange::compare(std::pair<t_timedef, double> *data, int count)
     return value;
 }
 
-void BitcoinExchange::parseFile(std::ifstream &infile, std::pair<t_timedef,
-	double> *data, int count)
+void BitcoinExchange::parseFile(std::ifstream &infile, std::map<t_timedef,
+	double> data)
 {
 	double	mult;
 
@@ -79,8 +79,7 @@ void BitcoinExchange::parseFile(std::ifstream &infile, std::pair<t_timedef,
 		try
 		{
 			parseDateValue(line);
-			data++;
-            mult = compare(data, count);
+            mult = compare(data);
 			if (mult == -1)
 				std::cout << "BitCoin wasn't released at this time" << std::endl;
 			else

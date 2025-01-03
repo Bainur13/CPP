@@ -16,20 +16,11 @@ int	main(int ac, char **av)
 		std::cout << "Invalid args, expected one" << std::endl;
 		return (0);
 	}
-
-    const int initial_size = 10;
-    int current_size = initial_size;
-    int count = 0;
-
-    // Allocation dynamique d'un tableau de std::pair
-    std::pair<t_timedef, double> *data = new std::pair<t_timedef, double>[current_size];
-
-    // Lecture du fichier CSV
+    std::map<t_timedef, double> data;
     std::ifstream file("data.csv");
     if (!file.is_open())
     {
         std::cerr << "Error opening database." << std::endl;
-        delete[] data;
         return 1;
     }
 
@@ -38,24 +29,11 @@ int	main(int ac, char **av)
     while (std::getline(file, line))
     {
         t_timedef tmp;
-        if (count == current_size)
-        {
-            // Redimensionnement du tableau
-            current_size *= 2;
-            std::pair<t_timedef, double> *new_data = new std::pair<t_timedef, double>[current_size];
-            for (int i = 0; i < count; ++i)
-            {
-                new_data[i] = data[i];
-            }
-            delete[] data;
-            data = new_data;
-        }
         tmp.Y = atoi(line.substr(0, 4).c_str());
         tmp.M = atoi(line.substr(5, 7).c_str());
         tmp.D = atoi(line.substr(8, 10).c_str());
         double value = stringToDouble(line.substr(11));
-        data[count] = std::make_pair(tmp, value);
-        count++;        
+        data[tmp] = value;       
     }
 
     file.close();
@@ -67,7 +45,7 @@ int	main(int ac, char **av)
     // }
 	try
 	{
-		BitcoinExchange o(av[1], data, count);
+		BitcoinExchange o(av[1], data);
 	}
 	catch (const std::exception &e)
 	{

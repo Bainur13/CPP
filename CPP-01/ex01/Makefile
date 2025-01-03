@@ -2,7 +2,7 @@ SRC =				main.cpp \
 					Zombie.cpp \
 					zombieHorde.cpp
 
-C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 
 
 NAME = BraiiiiiiinnnzzzZ
 

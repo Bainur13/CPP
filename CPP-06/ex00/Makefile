@@ -1,7 +1,7 @@
 SRC =				main.cpp \
 					ScalarConverter.cpp \
 
-C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+C++FLAGS = -Wall -Wextra -Werror -std=c++98 
 
 NAME = ScalarConverter
 

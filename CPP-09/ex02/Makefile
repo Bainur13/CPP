@@ -5,7 +5,7 @@ HEADERS =			PmergeMe.hpp \
 					PmergeMe.tpp
 
 
-C++FLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -g3
+C++FLAGS = -Wall -Wextra -Werror -std=c++98  -g3
 
 NAME = PmergeMe
 
