@@ -55,7 +55,50 @@ int main()
             std::cout << *it << std::endl;
             ++it;
         }
-        
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        std::cout << std::endl
+                  << "Mutant stack :" << std::endl;
+        MutantStack<int> mstackv2;
+        mstackv2.push(88);
+        mstackv2.push(77);
+        mstackv2.push(12);
+        mstackv2.push(18);
+        mstackv2.push(345);
+        mstackv2.push(123);
+        MutantStack<int>::iterator it = mstackv2.end();
+        while (it != mstackv2.begin())
+        {
+            it--;
+            std::cout << *it << std::endl;
+        }
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        std::cout << std::endl
+                  << "Iterator basic:" << std::endl;
+        std::list<int> listv2;
+        listv2.push_back(88);
+        listv2.push_back(77);
+        listv2.push_back(12);
+        listv2.push_back(18);
+        listv2.push_back(345);
+        listv2.push_back(123);
+        std::list<int>::iterator it = listv2.end();
+        while (it != listv2.begin())
+        {
+            it--;
+            std::cout << *it << std::endl;
+        }
     }
     catch (const std::exception &e)
     {

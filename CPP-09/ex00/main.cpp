@@ -16,6 +16,10 @@ int	main(int ac, char **av)
 		std::cout << "Invalid args, expected one" << std::endl;
 		return (0);
 	}
+
+    const int initial_size = 10;
+    int current_size = initial_size;
+
     std::map<t_timedef, double> data;
     std::ifstream file("data.csv");
     if (!file.is_open())
@@ -33,16 +37,9 @@ int	main(int ac, char **av)
         tmp.M = atoi(line.substr(5, 7).c_str());
         tmp.D = atoi(line.substr(8, 10).c_str());
         double value = stringToDouble(line.substr(11));
-        data[tmp] = value;       
+        data[tmp] = value;  
     }
-
     file.close();
-
-    // Affichage des données
-    // for (int i = 0; i < count; ++i)
-    // {
-    //     std::cout << "Date: " << data[i].first.Y << data[i].first.M << data[i].first.D << ", Price: " << data[i].second << std::endl;
-    // }
 	try
 	{
 		BitcoinExchange o(av[1], data);
