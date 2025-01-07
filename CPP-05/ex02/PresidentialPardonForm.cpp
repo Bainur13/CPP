@@ -23,7 +23,7 @@ PresidentialPardonForm::~PresidentialPardonForm()
 {
 }
 
-void PresidentialPardonForm::execute(Bureaucrat const &executor) const
+void PresidentialPardonForm::executeForm(Bureaucrat const &executor) const
 {
     if (!get_status())
         throw AForm::FormNotSignedException();

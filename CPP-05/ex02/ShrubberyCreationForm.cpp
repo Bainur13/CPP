@@ -21,7 +21,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 }
 
-void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+void ShrubberyCreationForm::executeForm(Bureaucrat const &executor) const
 {
     if (!get_status())
         throw AForm::FormNotSignedException();

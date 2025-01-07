@@ -26,7 +26,7 @@ RobotomyRequestForm::~RobotomyRequestForm()
 {
 }
 
-void RobotomyRequestForm::execute(Bureaucrat const &executor) const
+void RobotomyRequestForm::executeForm(Bureaucrat const &executor) const
 {
     int random = rand();
     if (!get_status())

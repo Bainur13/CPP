@@ -20,7 +20,7 @@ class ShrubberyCreationForm : public AForm
 
     ~ShrubberyCreationForm();
 
-    void execute(Bureaucrat const &executor) const;
+    void executeForm(Bureaucrat const &executor) const;
 
     void set_target(std::string target);
 
