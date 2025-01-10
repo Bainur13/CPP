@@ -31,6 +31,8 @@ class ScalarConverter
 	static void printfromInt(const std::string &input);
 	static void printfromFloat(const std::string &input);
 	static void printfromDouble(const std::string &input);
+
+	static bool isMultChar(const std::string &input);
 };
 
 #endif

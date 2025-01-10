@@ -21,6 +21,11 @@ ScalarConverter::~ScalarConverter()
 
 void ScalarConverter::convert(const std::string &input)
 {
+	if (isMultChar(input))
+	{
+		std::cout << "Invalid input" << std::endl;
+		return ;
+	}
 	if (isChar(input))
 		printfromChar(input);
 	else if (isInt(input))
@@ -276,5 +281,30 @@ bool ScalarConverter::isDouble(const std::string &input)
 			return (false);
 		i++;
 	}
+	return (true);
+}
+
+bool isStrDigit(const std::string &input)
+{
+	int	i;
+
+	i = 0;
+	if (input[i] == '+' || input[i] == '-')
+		i++;
+	while (input[i])
+	{
+		if (!isdigit(input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool ScalarConverter::isMultChar(const std::string &input)
+{
+	if (input.size() == 1)
+		return (false);
+	if (isStrDigit(input))
+		return (false);
 	return (true);
 }

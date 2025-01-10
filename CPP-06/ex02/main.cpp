@@ -50,25 +50,26 @@ void identify(Base *p)
 void identify(Base &p)
 {
     try {
-        dynamic_cast<A&>(p);
-        std::cout << "The class of the object reference is A" << std::endl;
+        A a = dynamic_cast<A&>(p);
+        std::cout << "The class of the object reference is A. Adress :" << &a << std::endl;
         return ;
     }
     catch(std::bad_cast &e){
     }
     try {
-        dynamic_cast<B&>(p);
-        std::cout << "The class of the object reference is B" << std::endl;
+        B b = dynamic_cast<B&>(p);
+        std::cout << "The class of the object reference is B. Adress : " << &b << std::endl;
         return ;
     }
     catch(std::bad_cast &e){
     }
     try {
-        dynamic_cast<C&>(p);
-        std::cout << "The class of the object reference is C" << std::endl;
+        C c = dynamic_cast<C&>(p);
+        std::cout << "The class of the object reference is C. Adress : " << &c << std::endl;
         return ;
     }
     catch(std::bad_cast &e){
+        std::cout << "The object is not an instance of A, B or C" << std::endl;
     }
 }
 
@@ -85,7 +86,8 @@ int main()
         std::cout << "Identifying reference :" << std::endl;
         identify(*tower);
         delete(tower);
-        std::cout << std::endl << std::endl;
+        if (i != 9)
+            std::cout << std::endl << std::endl;
     }
     return (0);
 }

@@ -12,6 +12,7 @@ void print(T &i)
 {
     std::cout << i << " ";
 }
+
 int main()
 {
     int tab[] = {1,2,3,4,5,6,7,8,9};
@@ -19,5 +20,4 @@ int main()
 
     iter(tab, 9, add_one);
     iter(tab, 9, print<int>);
-    
 }

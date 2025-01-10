@@ -50,6 +50,7 @@ public:
             throw(std::out_of_range("Index out of range"));
         return _array[i];
     }
+    
     int size() const
     {
         return _size;
