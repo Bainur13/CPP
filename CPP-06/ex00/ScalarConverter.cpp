@@ -21,11 +21,6 @@ ScalarConverter::~ScalarConverter()
 
 void ScalarConverter::convert(const std::string &input)
 {
-	if (isMultChar(input))
-	{
-		std::cout << "Invalid input" << std::endl;
-		return ;
-	}
 	if (isChar(input))
 		printfromChar(input);
 	else if (isInt(input))
@@ -66,11 +61,18 @@ void ScalarConverter::printfromInt(const std::string &input)
 	int		n;
 	float	f;
 	double	d;
+	char c;
 
 	n = atoi(input.c_str());
+	c = static_cast<char>(n); 
 	f = static_cast<float>(n);
 	d = static_cast<double>(n);
-	std::cout << "Char = Impossible" << std::endl;
+	if (n > 31 && n < 127)
+		std::cout << "Char : '" << c << "'" << std::endl;
+	else if (n >= CHAR_MIN && n <= CHAR_MAX)
+		std::cout << "Char : Non displayable" << std::endl;
+	else
+		std::cout << "Char : Impossible" << std::endl;
 	std::cout << "Int = " << n << std::endl;
 	std::cout << "Float = " << std::fixed << std::setprecision(1) << f << 'f' << std::endl;
 	std::cout << "Double = " << std::fixed << std::setprecision(1) << d << std::endl;
@@ -102,7 +104,7 @@ void ScalarConverter::printfromFloat(const std::string &input)
 	else if (n >= CHAR_MIN && n <= CHAR_MAX)
 		std::cout << "Char : Non displayable" << std::endl;
 	else
-		std::cout << "Char : Impossible" << std::endl;
+		std::cout << "Char : Impossible" << std::endl;	
 	if (d > 2147483647 || d < -2147483648)
 		std::cout << "Int : Impossible" << std::endl;
 	else
@@ -163,10 +165,8 @@ bool ScalarConverter::isChar(const std::string &input)
 {
 	int	n;
 
-	if (input.length() > 3 && (input.length() > 4 && input.c_str()[0] == '-'))
-	{
-		return (false);
-	}
+	if (input.length() != 1 || isdigit(input[0]))
+		return false;
 	for (int i = 0; i < (int)input.size(); i++)
 	{
 		if (!isdigit(input.c_str()[i]))
@@ -297,14 +297,5 @@ bool isStrDigit(const std::string &input)
 			return (false);
 		i++;
 	}
-	return (true);
-}
-
-bool ScalarConverter::isMultChar(const std::string &input)
-{
-	if (input.size() == 1)
-		return (false);
-	if (isStrDigit(input))
-		return (false);
 	return (true);
 }
