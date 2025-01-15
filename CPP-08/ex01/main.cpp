@@ -17,7 +17,7 @@ int main(void)
     }
     catch (std::exception &e)
     {
-        std::cout << "error first example :" << e.what() << std::endl;
+        std::cout << "error first example : " << e.what() << std::endl;
     }
     try
     {
@@ -27,7 +27,7 @@ int main(void)
     }
     catch (std::exception &e)
     {
-        std::cout << "error second example :" << e.what() << std::endl;
+        std::cout << "error second example : " << e.what() << std::endl;
     }
 
     std::cout << std::endl

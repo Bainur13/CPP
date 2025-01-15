@@ -5,7 +5,8 @@ BitcoinExchange::BitcoinExchange()
 }
 
 BitcoinExchange::BitcoinExchange(std::string file, std::map<t_timedef,
-	double> data)
+															double>
+													   data)
 {
 	std::ifstream ifile(file.c_str());
 	_countLine = 0;
@@ -43,9 +44,9 @@ double BitcoinExchange::compare(std::map<t_timedef, double> data)
 {
 	double value;
 
-    value = -1;
+	value = -1;
 	for (std::map<t_timedef, double>::iterator it = data.begin(); it != data.end(); it++)
-	{		
+	{
 		if (it->first.Y < _data.first.Y)
 			value = it->second;
 		else if (it->first.Y == _data.first.Y)
@@ -63,23 +64,27 @@ double BitcoinExchange::compare(std::map<t_timedef, double> data)
 				break;
 		}
 		else
-			break ;
+			break;
 	}
-    return value;
+	return value;
 }
 
 void BitcoinExchange::parseFile(std::ifstream &infile, std::map<t_timedef,
-	double> data)
+																double>
+														   data)
 {
-	double	mult;
+	double mult;
 
 	std::string line;
+	getline(infile, line);
+	if (line.empty())
+		std::cerr << "Error file empty" << std::endl;
 	while (getline(infile, line))
 	{
 		try
 		{
 			parseDateValue(line);
-            mult = compare(data);
+			mult = compare(data);
 			if (mult == -1)
 				std::cout << "BitCoin wasn't released at this time" << std::endl;
 			else
@@ -95,9 +100,9 @@ void BitcoinExchange::parseFile(std::ifstream &infile, std::map<t_timedef,
 
 void BitcoinExchange::parseDateValue(std::string &line)
 {
-	float		value;
-	int			pos;
-	t_timedef	date;
+	float value;
+	int pos;
+	t_timedef date;
 
 	pos = 0;
 	skipSpace(line, DIGIT, pos);
@@ -117,7 +122,7 @@ void BitcoinExchange::parseDateValue(std::string &line)
 
 int BitcoinExchange::parseInteger(std::string &line, int &pos)
 {
-	long	n;
+	long n;
 
 	std::string numbs;
 	if (line[pos] == '-')
@@ -140,7 +145,7 @@ int BitcoinExchange::parseInteger(std::string &line, int &pos)
 
 float BitcoinExchange::parsefloat(std::string &line, int &pos)
 {
-	double	f;
+	double f;
 
 	std::string numbs;
 	while (isdigit(line[pos]) || line[pos] == '.')
@@ -159,18 +164,18 @@ void BitcoinExchange::skipSpace(std::string &line, int type, int &pos)
 	while (line[pos])
 	{
 		if (!isspace(line[pos]))
-			break ;
+			break;
 		pos++;
 	}
 	if (type == DIGIT && (isdigit(line[pos]) || line[pos] == '-'))
-		return ;
+		return;
 	else if (type == SYM && line[pos] == '|')
 	{
 		pos++;
-		return ;
+		return;
 	}
 	throwInvalidLine(line);
-	return ;
+	return;
 }
 
 void BitcoinExchange::checkEndl(std::string &line, int &pos)
@@ -192,17 +197,15 @@ void BitcoinExchange::checkChar(char c, char test, int &pos, std::string &line)
 
 void BitcoinExchange::isValidDate(t_timedef date)
 {
-	int	daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 	if (date.Y < 1900 || date.Y > 2100)
 	{
-		throwInvalid("Error : bad input YEAR => " + to_string(date.Y) + '-'
-			+ to_string(date.M) + '-' + to_string(date.D));
+		throwInvalid("Error : bad input YEAR => " + to_string(date.Y) + '-' + to_string(date.M) + '-' + to_string(date.D));
 	}
 	if (date.M < 1 || date.M > 12)
 	{
-		throwInvalid("Error : bad input MONTH => " + to_string(date.Y) + '-'
-			+ to_string(date.M) + '-' + to_string(date.D));
+		throwInvalid("Error : bad input MONTH => " + to_string(date.Y) + '-' + to_string(date.M) + '-' + to_string(date.D));
 	}
 	if ((date.Y % 4 == 0 && date.Y % 100 != 0) || (date.Y % 400 == 0))
 	{
@@ -210,8 +213,7 @@ void BitcoinExchange::isValidDate(t_timedef date)
 	}
 	if (date.D < 1 || date.D > daysInMonth[date.M - 1])
 	{
-		throwInvalid("Error : bad input DAY => " + to_string(date.Y) + '-'
-			+ to_string(date.M) + '-' + to_string(date.D));
+		throwInvalid("Error : bad input DAY => " + to_string(date.Y) + '-' + to_string(date.M) + '-' + to_string(date.D));
 	}
 }
 

@@ -47,8 +47,9 @@ unsigned int Span::shortestSpan()
     shortest = UINT_MAX;
     if (_vec.size() < 2)
         throwNotEnoughNumbers();
-    std::sort(_vec.begin(), _vec.end());
-    for (std::vector<int>::iterator it_b = _vec.begin(); it_b != _vec.end() - 1; it_b++)
+    std::vector<int> vec2 = _vec;
+    std::sort(vec2.begin(), vec2.end());
+    for (std::vector<int>::iterator it_b = vec2.begin(); it_b != vec2.end() - 1; it_b++)
     {
         unsigned int diff = static_cast<unsigned int>(*(it_b + 1) - *it_b);
         if (diff == 0)
@@ -63,8 +64,9 @@ unsigned int Span::longestSpan()
 {
     if (_vec.size() < 2)
         throwNotEnoughNumbers();
-    std::sort(_vec.begin(), _vec.end());
-    return (_vec.back() - _vec.front());
+    std::vector<int> _vec2 = _vec;
+    std::sort(_vec2.begin(), _vec2.end());
+    return (_vec2.back() - _vec2.front());
 }
 
 Span::Span() : _N(0) {}

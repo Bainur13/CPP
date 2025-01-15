@@ -17,9 +17,6 @@ int	main(int ac, char **av)
 		return (0);
 	}
 
-    const int initial_size = 10;
-    int current_size = initial_size;
-
     std::map<t_timedef, double> data;
     std::ifstream file("data.csv");
     if (!file.is_open())
