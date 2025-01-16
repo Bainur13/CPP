@@ -224,7 +224,8 @@ template <typename Container> void PmergeMe<Container>::pendInsertion()
 				_vec_cont.insert(_vec_cont.begin() + left, _pend[idx_pend]);
 				_pend.erase(_pend.begin() + idx_pend);
 				_posPend.erase(_posPend.begin() + idx_pend);
-				_posCont.insert(_posCont.begin() + left, "0");
+				if (left <= (int)_posCont.size())\
+					_posCont.insert(_posCont.begin() + left, "0");
 				nbrtimes--;
 				idx_pend--;
 				right = jacob + inserted;
@@ -232,6 +233,7 @@ template <typename Container> void PmergeMe<Container>::pendInsertion()
 			}
 		}
 		inserted += jacDiff;
+		preJacob = jacob;
 	}
 	while (_pend.empty() == 0)
 	{
@@ -286,7 +288,10 @@ template <typename Container> void PmergeMe<Container>::insertOdd()
 		}
 	}
 	while (_vec_cont[left].back() < _odd.back().back())
-		left++;
+	{
+		if ((int)_vec_cont.size() > left)
+			left++;
+	}
 	if (left > (int)_vec_cont.size())
 		_vec_cont.resize(left);
 	_vec_cont.insert(_vec_cont.begin() + left, _odd.back());
@@ -330,7 +335,7 @@ template <typename Container> bool PmergeMe<Container>::sort(std::string av)
 	duration = double(end - start) / CLOCKS_PER_SEC;
 	isSorted();
 	std::cout << std::endl;
-	printVectorOfContainer(_vec_cont);
+	// printVectorOfContainer(_vec_cont);
 	return (0);
 }
 template <typename Container> void PmergeMe<Container>::printVectorOfContainer(const std::vector<Container> &vec)

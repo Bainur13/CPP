@@ -219,14 +219,14 @@ void BitcoinExchange::isValidDate(t_timedef date)
 
 void BitcoinExchange::isValidValue(float value)
 {
-	if (value <= 0)
+	if (value < 0)
 	{
 		std::string error;
 		error = "Error : not a strictly positive number => ";
 		error += to_string(value);
 		throwInvalid(error);
 	}
-	if (static_cast<long>(value) > INT_MAX)
+	if (static_cast<long>(value) > 1000)
 	{
 		std::string error;
 		error = "Error : Too large number => ";

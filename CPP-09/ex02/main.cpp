@@ -1,5 +1,6 @@
 #include "PmergeMe.hpp"
 
+#include <iomanip>
 
 void printFive(std::string av)
 {
@@ -26,8 +27,7 @@ int	main(int ac, char **av)
 		std::cerr << "Wrong number of args" << std::endl;
 		return (1);
 	}
-	std::cout << "Before: ";
-	printFive(av[1]);
+	
 	
 	PmergeMe<std::deque<unsigned int> > test;
 	PmergeMe<std::vector<unsigned int> > test2;
@@ -35,6 +35,8 @@ int	main(int ac, char **av)
 		return (1);
 	if (test2.sort(av[1]) == 1)
 		return (1);
+	std::cout << "Before: ";
+	printFive(av[1]);
 	std::cout << "After: ";
 	if (test.getCont().size() > 5)
 	{
@@ -48,7 +50,7 @@ int	main(int ac, char **av)
 			std::cout << test.getCont()[i] << " ";
 		std::cout << std::endl;
 	}
-	std::cout << "Time to process a range of " << test.getCont().size() << " elements with a deque: " << test.duration<< "us" << std::endl;
-	std::cout << "Time to process a range of " << test2.getCont().size() << " elements with a vector: " << test2.duration << "us" << std::endl;
+	std::cout << "Time to process a range of " << test.getCont().size() << " elements with a deque: " << std::fixed << std::setprecision(5) << test.duration<< "us" << std::endl;
+	std::cout << "Time to process a range of " << test2.getCont().size() << " elements with a vector: " << std::fixed << std::setprecision(5) << test2.duration << "us" << std::endl;
 	return (0);
 }
