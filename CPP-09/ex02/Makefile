@@ -20,7 +20,7 @@ RED = \033[0;31m
 $(NAME): $(OBJ)
 	c++ $(C++FLAGS) $(OBJ) -o $(NAME)
 	@echo "	 			$(RED)+------------------------+\n \
-					|  $(YELLOW)       PmergeMe$(GREEN)[OK]$(RED)        |\n \
+					|  $(YELLOW)      PmergeMe$(GREEN)[OK]$(RED)    |\n \
 					+------------------------+$(NC)"
 
 all: $(NAME)
