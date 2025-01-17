@@ -3,6 +3,7 @@
         "deque": "cpp",
         "string": "cpp",
         "vector": "cpp",
-        "*.tpp": "cpp"
+        "*.tpp": "cpp",
+        "iostream": "cpp"
     }
 }

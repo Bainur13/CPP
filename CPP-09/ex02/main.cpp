@@ -50,7 +50,7 @@ int	main(int ac, char **av)
 			std::cout << test.getCont()[i] << " ";
 		std::cout << std::endl;
 	}
-	std::cout << "Time to process a range of " << test.getCont().size() << " elements with a deque: " << std::fixed << std::setprecision(5) << test.duration<< "us" << std::endl;
+	std::cout << "Time to process a range of " << test.getCont().size() << " elements with a deque: " << std::fixed << std::setprecision(5) << test.duration << "us" << std::endl;
 	std::cout << "Time to process a range of " << test2.getCont().size() << " elements with a vector: " << std::fixed << std::setprecision(5) << test2.duration << "us" << std::endl;
 	return (0);
 }

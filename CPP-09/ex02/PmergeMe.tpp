@@ -1,15 +1,19 @@
 #include "PmergeMe.hpp"
 
-template <typename Container> PmergeMe<Container>::PmergeMe()
+template <typename Container>
+PmergeMe<Container>::PmergeMe()
 {
 }
-template <typename Container> PmergeMe<Container>::PmergeMe(const PmergeMe &to_cpy) : _cont(to_cpy._cont)
+template <typename Container>
+PmergeMe<Container>::PmergeMe(const PmergeMe &to_cpy) : _cont(to_cpy._cont)
 {
 }
-template <typename Container> PmergeMe<Container>::PmergeMe(const Container &to_cpy) : _cont(to_cpy)
+template <typename Container>
+PmergeMe<Container>::PmergeMe(const Container &to_cpy) : _cont(to_cpy)
 {
 }
-template <typename Container> PmergeMe<Container> &PmergeMe<Container>::operator=(const PmergeMe<Container> &to_cpy)
+template <typename Container>
+PmergeMe<Container> &PmergeMe<Container>::operator=(const PmergeMe<Container> &to_cpy)
 {
 	if (this != &to_cpy)
 	{
@@ -18,10 +22,12 @@ template <typename Container> PmergeMe<Container> &PmergeMe<Container>::operator
 	return (*this);
 }
 
-template <typename Container> PmergeMe<Container>::~PmergeMe()
+template <typename Container>
+PmergeMe<Container>::~PmergeMe()
 {
 }
-template <typename Container> void PmergeMe<Container>::addElements(const std::string &numbs)
+template <typename Container>
+void PmergeMe<Container>::addElements(const std::string &numbs)
 {
 	std::istringstream iss(numbs);
 	std::vector<unsigned int>::value_type num;
@@ -31,7 +37,8 @@ template <typename Container> void PmergeMe<Container>::addElements(const std::s
 	}
 }
 
-template <typename Container> bool PmergeMe<Container>::isSorted()
+template <typename Container>
+bool PmergeMe<Container>::isSorted()
 {
 	if (_cont.size() == 1)
 	{
@@ -46,7 +53,8 @@ template <typename Container> bool PmergeMe<Container>::isSorted()
 	std::cout << "Already Sorted" << std::endl;
 	return (1);
 }
-template <typename Container> bool PmergeMe<Container>::isDouble()
+template <typename Container>
+bool PmergeMe<Container>::isDouble()
 {
 	for (size_t i = 0; i < _cont.size(); ++i)
 	{
@@ -61,20 +69,20 @@ template <typename Container> bool PmergeMe<Container>::isDouble()
 	}
 	return (0);
 }
-template <typename Container> void PmergeMe<Container>::makePairAndSortRec(int size)
+template <typename Container>
+void PmergeMe<Container>::makePairAndSortRec(int size)
 {
-	int	npairs;
+	int npairs;
 
 	std::vector<Container> vec_cont_tmp;
 	npairs = _vec_cont.size() * size / 2 / size;
 	if (npairs == 0)
-		return ;
+		return;
 	vec_cont_tmp.resize(npairs);
 	for (int i = 0; i < npairs; i++)
 	{
 		vec_cont_tmp[i] = _vec_cont[i * 2];
-		vec_cont_tmp[i].insert(vec_cont_tmp[i].end(), _vec_cont[i * 2
-			+ 1].begin(), _vec_cont[i * 2 + 1].end());
+		vec_cont_tmp[i].insert(vec_cont_tmp[i].end(), _vec_cont[i * 2 + 1].begin(), _vec_cont[i * 2 + 1].end());
 	}
 	if (_vec_cont.size() % 2 == 1)
 	{
@@ -87,12 +95,13 @@ template <typename Container> void PmergeMe<Container>::makePairAndSortRec(int s
 	_maxPair = size;
 	makePairAndSortRec(size * 2);
 }
-template <typename Container> void PmergeMe<Container>::swap(int size)
+template <typename Container>
+void PmergeMe<Container>::swap(int size)
 {
-	unsigned int	tmp;
-	int				uplimit;
-	int				downlimit;
-	int				l;
+	unsigned int tmp;
+	int uplimit;
+	int downlimit;
+	int l;
 
 	for (int i = 0; i < (int)_vec_cont.size(); i++)
 	{
@@ -113,9 +122,10 @@ template <typename Container> void PmergeMe<Container>::swap(int size)
 		}
 	}
 }
-template <typename Container> void PmergeMe<Container>::makePairAndSort()
+template <typename Container>
+void PmergeMe<Container>::makePairAndSort()
 {
-	int	npairs;
+	int npairs;
 
 	npairs = _cont.size() / 2;
 	_vec_cont.resize(npairs);
@@ -141,21 +151,22 @@ template <typename Container> void PmergeMe<Container>::makePairAndSort()
 	makePairAndSortRec(4);
 }
 
-template <typename Container> void PmergeMe<Container>::divide(int size)
+template <typename Container>
+void PmergeMe<Container>::divide(int size)
 {
-	int	npairs;
+	int npairs;
 
 	npairs = _cont.size() / size;
 	_vec_cont.resize(npairs);
 	for (int i = 0; i < npairs; i++)
 	{
-		Container temp(_cont.begin() + i * size, _cont.begin() + (i + 1)
-			* size);
+		Container temp(_cont.begin() + i * size, _cont.begin() + (i + 1) * size);
 		_vec_cont[i] = temp;
 	}
 }
 
-template <typename Container> void PmergeMe<Container>::setPend()
+template <typename Container>
+void PmergeMe<Container>::setPend()
 {
 	_pend.clear();
 	for (int i = 2; i < (int)_vec_cont.size(); i += 2)
@@ -182,17 +193,18 @@ template <typename Container> void PmergeMe<Container>::setPend()
 	}
 }
 
-template <typename Container> void PmergeMe<Container>::pendInsertion()
+template <typename Container>
+void PmergeMe<Container>::pendInsertion()
 {
-	int	left;
-	int	right;
-	int	mid;
-	int	preJacob;
-	int	inserted;
-	int	jacob;
-	int	jacDiff;
-	int	nbrtimes;
-	int	idx_pend;
+	int left;
+	int right;
+	int mid;
+	int preJacob;
+	int inserted;
+	int jacob;
+	int jacDiff;
+	int nbrtimes;
+	int idx_pend;
 
 	preJacob = jacobsthal(1);
 	inserted = 0;
@@ -202,7 +214,7 @@ template <typename Container> void PmergeMe<Container>::pendInsertion()
 		jacob = jacobsthal(i);
 		jacDiff = jacob - preJacob;
 		if (jacDiff > (int)_pend.size())
-			break ;
+			break;
 		nbrtimes = jacDiff;
 		idx_pend = jacDiff - 1;
 		right = jacob + inserted;
@@ -210,8 +222,7 @@ template <typename Container> void PmergeMe<Container>::pendInsertion()
 		while (nbrtimes)
 		{
 			mid = left + (right - left) / 2;
-			if (_pend.empty() == 0
-				&& _pend[idx_pend].back() > _vec_cont[mid].back())
+			if (_pend.empty() == 0 && _pend[idx_pend].back() > _vec_cont[mid].back())
 			{
 				left = mid + 1;
 			}
@@ -224,7 +235,7 @@ template <typename Container> void PmergeMe<Container>::pendInsertion()
 				_vec_cont.insert(_vec_cont.begin() + left, _pend[idx_pend]);
 				_pend.erase(_pend.begin() + idx_pend);
 				_posPend.erase(_posPend.begin() + idx_pend);
-				if (left <= (int)_posCont.size())\
+				if (left <= (int)_posCont.size())
 					_posCont.insert(_posCont.begin() + left, "0");
 				nbrtimes--;
 				idx_pend--;
@@ -263,15 +274,16 @@ template <typename Container> void PmergeMe<Container>::pendInsertion()
 		if (left > (int)_posCont.size())
 			_posCont.resize(left);
 		else
-		_posCont.insert(_posCont.begin() + left, "0");
+			_posCont.insert(_posCont.begin() + left, "0");
 	}
 }
 
-template <typename Container> void PmergeMe<Container>::insertOdd()
+template <typename Container>
+void PmergeMe<Container>::insertOdd()
 {
-	int	left;
-	int	right;
-	int	mid;
+	int left;
+	int right;
+	int mid;
 
 	left = 0;
 	right = _vec_cont.size();
@@ -287,16 +299,16 @@ template <typename Container> void PmergeMe<Container>::insertOdd()
 			right = mid;
 		}
 	}
-	while (_vec_cont[left].back() < _odd.back().back())
+	while ((_vec_cont.size() < (size_t) left) && (_vec_cont[left].back() < _odd.back().back()))
 	{
-		if ((int)_vec_cont.size() > left)
-			left++;
+		left++;
 	}
 	if (left > (int)_vec_cont.size())
 		_vec_cont.resize(left);
 	_vec_cont.insert(_vec_cont.begin() + left, _odd.back());
 }
-template <typename Container> void PmergeMe<Container>::makeInsert()
+template <typename Container>
+void PmergeMe<Container>::makeInsert()
 {
 	while (_maxPair > 0)
 	{
@@ -318,9 +330,10 @@ template <typename Container> void PmergeMe<Container>::makeInsert()
 		_cont.insert(_cont.end(), _vec_cont[i].begin(), _vec_cont[i].end());
 }
 
-template <typename Container> bool PmergeMe<Container>::sort(std::string av)
+template <typename Container>
+bool PmergeMe<Container>::sort(std::string av)
 {
-	std::clock_t	start = std::clock();
+	std::clock_t start = std::clock();
 	if (!check_inp(av))
 	{
 		std::cerr << "Invalid arg" << std::endl;
@@ -332,13 +345,14 @@ template <typename Container> bool PmergeMe<Container>::sort(std::string av)
 	makePairAndSort();
 	makeInsert();
 	std::clock_t end = std::clock();
-	duration = double(end - start) / CLOCKS_PER_SEC;
-	isSorted();
-	std::cout << std::endl;
+	duration = double(end - start) / CLOCKS_PER_SEC * 1000000;
+	// isSorted();
+	// std::cout << std::endl;
 	// printVectorOfContainer(_vec_cont);
 	return (0);
 }
-template <typename Container> void PmergeMe<Container>::printVectorOfContainer(const std::vector<Container> &vec)
+template <typename Container>
+void PmergeMe<Container>::printVectorOfContainer(const std::vector<Container> &vec)
 {
 	for (size_t i = 0; i < vec.size(); i++)
 	{
@@ -350,7 +364,8 @@ template <typename Container> void PmergeMe<Container>::printVectorOfContainer(c
 	}
 }
 
-template <typename Container> Container PmergeMe<Container>::getCont() const
+template <typename Container>
+Container PmergeMe<Container>::getCont() const
 {
 	return (_cont);
 }
