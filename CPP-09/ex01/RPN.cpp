@@ -1,6 +1,6 @@
 #include "RPN.hpp"
 
-RPN::RPN()
+RPN::RPN() : _op('p')
 {
 }
 
@@ -74,8 +74,10 @@ void RPN::execCalcul()
 {
 	long	n;
 
-	if (_stackNumbers.size() < 2 || _op == 'p')
+	if (_op == 'p')
 		return ;
+	if (_stackNumbers.size() < 2)
+		throwError();
 	switch (handleOperator(_op))
 	{
 	case 1:
@@ -95,6 +97,8 @@ void RPN::execCalcul()
 	case 3:
 		n = _stackNumbers.top();
 		_stackNumbers.pop();
+		if (n == 0)
+			throwError();
 		n = _stackNumbers.top() / n;
 		_stackNumbers.pop();
 		_stackNumbers.push(n);
